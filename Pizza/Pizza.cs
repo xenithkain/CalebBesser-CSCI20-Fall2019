@@ -1,13 +1,10 @@
 using System;
 
-  class Pizza
+  class Pizza_Code
   {
-    static void Main ()
+    static void Pizza ()
     {
-      string Pepperoni, Cheese, Veggi, Meat, Pizza_Size, Pizza_Type;
-      int Large = 16;
-      int Medium = 10;
-      int Small = 6;
+      string Pizza_Size, Pizza_Type;
       int Number_of_People, People_Paying;
       double Cost_Split;
       double Cost = 0;

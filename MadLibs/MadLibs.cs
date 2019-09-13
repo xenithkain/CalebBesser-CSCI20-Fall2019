@@ -1,8 +1,8 @@
 using System;
 
-class MadLibs {
+class MadLibs_Code {
   
-    static void MadLibs_Code()
+    static void MadLibs()
   {
     string Noun1, Noun2, Adjective1, Adjective2, Verb;
     Console.WriteLine ("Write 2 Nouns, 2 Adjectives, and 1 Verb in that order. Hit Enter after each.");

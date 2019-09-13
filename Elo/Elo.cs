@@ -1,8 +1,7 @@
 using System;
 
-  class Rank {
- 
-    static void Elo_Code () 
+  class Elo_Code { 
+    static void Main () 
   {
       string CurrentRank, WantedRank, Wins_S, Losses_S; 
       float WinRate, WinRate_Decimal, TotalGames,Wins_D, Losses_D, GamesTimesWinRate;
@@ -198,7 +197,7 @@ using System;
       
       Console.WriteLine("Good your Winrate is " + WinRate + "%. You wanted " + WantedRank + ", to get there with that winrate would take " + FinalGames + " Games." );
 
-      
-      
+
+        Console.ReadLine();
   }
 }

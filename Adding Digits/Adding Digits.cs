@@ -1,8 +1,8 @@
 using System;
 
-  class AddingDigits {
+  class AddingDigits_Code {
  
-    static void AddingDigits_Code () 
+    static void AddingDigits () 
   {
       int Digit1, Digit2, Digit3, Final;
       string Number;

@@ -1,8 +1,8 @@
 using System;
 
-class Chatbot {
+class Chatbot_Code {
   
-  static void Chatbot_Code() 
+  static void Chatbot() 
   {
     string Name, Sport, Animal, Birthday, Answer; 
     
