@@ -1,7 +1,7 @@
 using System;
 
   class Elo_Code { 
-    static void Main () 
+    static void Elo() 
   {
       string CurrentRank, WantedRank, Wins_S, Losses_S; 
       float WinRate, WinRate_Decimal, TotalGames,Wins_D, Losses_D, GamesTimesWinRate;
