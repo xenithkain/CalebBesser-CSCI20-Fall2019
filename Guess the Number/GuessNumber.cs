@@ -5,7 +5,7 @@
 using System;
 class Guess_Number_Code
 {
-    static void Main()
+    static void Guess()
     {       
         Console.WriteLine("Try and guess my number.");
         Guess_Check();
