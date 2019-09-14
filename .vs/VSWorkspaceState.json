@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Pizza"
+    "\\Guess the Number",
+    "\\Rock, Paper, Scissors"
   ],
-  "SelectedNode": "\\MadLibs",
+  "SelectedNode": "\\Rock, Paper, Scissors\\Rock, Paper, Scissors.cs",
   "PreviewInSolutionExplorer": false
 }

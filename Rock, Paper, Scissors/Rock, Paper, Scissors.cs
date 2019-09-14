@@ -7,7 +7,7 @@ using System;
 class MainClass
 {
 
-    static void Main()
+    static void R_P_S ()
     {
         string Thrown, Comp_Thrown;
         var random = new Random();
