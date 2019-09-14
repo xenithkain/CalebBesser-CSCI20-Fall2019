@@ -3,21 +3,23 @@
 // This code makes a random number, then lets you guess till you get it right.
 
 using System;
-
 class Guess_Number_Code
 {
     static void Main()
+    {       
+        Console.WriteLine("Try and guess my number.");
+        Guess_Check();
+    }
+    // This will loop over and over the player guessing untill they get it right
+    static void Guess_Check()
     {
         int Guess = 0;
         var random = new Random();
         int rnd = random.Next(100);
-
-        Console.WriteLine("Try and guess my number.");
-        
-        // This will loop over and over the player guessing untill they get it right
         while ((Guess) != rnd)
         {
             Guess = Convert.ToInt32(Console.ReadLine());
+
             if (Guess > rnd)
             {
                 Console.WriteLine("Sorry that's to high try again.");
@@ -30,9 +32,9 @@ class Guess_Number_Code
             {
                 Console.WriteLine("Thats right, my number is " + rnd + " . You win!");
                 Console.ReadLine();
-
             }
         }
-        
     }
 }
+
+   
