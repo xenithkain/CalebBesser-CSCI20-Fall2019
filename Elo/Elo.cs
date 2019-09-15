@@ -2,7 +2,7 @@ using System;
 
 class Elo_Code
 {
-    static void Main()
+    static void Elo()
     {
         string Wins_S, Losses_S = "10";
         string CurrentRank, WantedRank;
