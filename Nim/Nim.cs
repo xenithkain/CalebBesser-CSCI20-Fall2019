@@ -24,6 +24,14 @@ class Game_Of_Nim
                     P1_Pile = Convert.ToInt32(Console.ReadLine());
                     Console.Write("Your turn, how man will you take? 1,2, or 3? ");
                     P1_Beads = Convert.ToInt32(Console.ReadLine());
+                    if (Pile_1 == 0) //Added so player cant just spam one pile until they can pick the other pile 2 win.
+                    {
+                        P1_Pile = 2;
+                    }
+                    else if (Pile_2 == 0)
+                    {
+                        P1_Pile = 1;
+                    }
                     if (P1_Pile > 2) //Added to stop player from being able to pick more than 3 beads.
                     {
                         P1_Pile = 2; 
@@ -32,6 +40,7 @@ class Game_Of_Nim
                     {
                         P1_Beads = 3;
                     }
+                   
                     if (P1_Pile == 1)
                     {
                         Pile_1 = Pile_1 - P1_Beads;
@@ -39,12 +48,13 @@ class Game_Of_Nim
                     else
                     {
                         Pile_2 = Pile_2 - P1_Beads;
-                    }                    
+                    }
+
                     if (Pile_1 <= 0) //Added to both player 1 and 2, to stop pile count from going into negatives.
                     {
                         Pile_1 = 0;
                     }
-                    if (Pile_2 <= 0)
+                    else if (Pile_2 <= 0)
                     {
                         Pile_2 = 0;
                     }
