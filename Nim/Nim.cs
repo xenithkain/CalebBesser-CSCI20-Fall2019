@@ -20,9 +20,9 @@ class Game_Of_Nim
             {
                 //This is player 1's code, it stops the loop and says player 1 wins if the piles hit zero on his turn
                 case 1:
-                    Console.Write("Player 1, which pile do you choose? 1 or 2? ");
+                    Console.Write("Your turn, which pile do you choose? 1 or 2? ");
                     P1_Pile = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("Player 1, how man will you take? 1,2, or 3? ");
+                    Console.Write("Your turn, how man will you take? 1,2, or 3? ");
                     P1_Beads = Convert.ToInt32(Console.ReadLine());
                     if (P1_Pile > 2) //Added to stop player from being able to pick more than 3 beads.
                     {
@@ -63,7 +63,7 @@ class Game_Of_Nim
                     int P2_Beads = rnd.Next(1, 4);
                     int P2_Pile = rnd.Next(1, 3);
 
-                    Console.WriteLine("Computer's Turn, They chose pile " + P2_Pile + ", and " + P2_Beads + " beads.");
+                    Console.WriteLine("My Turn, I chose pile " + P2_Pile + ", and " + P2_Beads + " beads.");
                     
                     if (P2_Pile == 1)
                     {
@@ -85,7 +85,7 @@ class Game_Of_Nim
                     if (Pile_1 == 0 && Pile_2 == 0)
                     {
                         GameIsDone = false;
-                        Console.WriteLine("Player 2 Wins!");
+                        Console.WriteLine("I Win!");
                         Console.ReadLine();
                     }
                     Turn = 1;
