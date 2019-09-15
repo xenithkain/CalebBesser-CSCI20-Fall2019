@@ -24,6 +24,14 @@ class Game_Of_Nim
                     P1_Pile = Convert.ToInt32(Console.ReadLine());
                     Console.Write("Player 1, how man will you take? 1,2, or 3? ");
                     P1_Beads = Convert.ToInt32(Console.ReadLine());
+                    if (P1_Pile > 2) //Added to stop player from being able to pick more than 3 beads.
+                    {
+                        P1_Pile = 2; 
+                    }
+                    if (P1_Beads > 3)
+                    {
+                        P1_Beads = 3;
+                    }
                     if (P1_Pile == 1)
                     {
                         Pile_1 = Pile_1 - P1_Beads;
