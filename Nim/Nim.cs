@@ -106,3 +106,17 @@ class Game_Of_Nim
         Console.ReadLine();
     }
 }
+//You can win, you can lost, i couldnt tie though, you cant tie in this game.
+
+    
+//  Here is my Psudo Code as well.
+//  My game will have, 2 players one being a computer.
+// i plan on having the computers choices be selected at random.
+//  I will probably use a while loop to alternate turns, then when
+// the piles hit zero i will stop the loop.
+//  Then whenever it stops ill probably use a if statement to
+// see whos turn it is and say that person wins.
+
+//  Things i see potentially being problems: Alterating turns, having the 
+//code know whos turn it is when the game ends, and using random to pick
+//the computers moves since i was having trouble with that.
