@@ -5,7 +5,7 @@ using System;
 
 class Game_Of_Nim
 {
-    static void Nim()
+    static void Main()
     {
        
         bool GameIsDone = true;
@@ -23,7 +23,7 @@ class Game_Of_Nim
                     Console.Write("Your turn, which pile do you choose? 1 or 2? ");
                     P1_Pile = Convert.ToInt32(Console.ReadLine());
                     Console.Write("Your turn, how man will you take? 1,2, or 3? ");
-                    P1_Beads = Convert.ToInt32(Console.ReadLine());
+                    P1_Beads = Convert.ToInt32(Console.ReadLine());                 
                     if (Pile_1 == 0) //Added so player cant just spam one pile until they can pick the other pile 2 win.
                     {
                         P1_Pile = 2;
@@ -106,6 +106,10 @@ class Game_Of_Nim
                         Console.ReadLine();
                     }
                     Turn = 1;
+                    break;
+                default:
+                    Console.WriteLine("You inputted something wrong, plz restart and try again.");
+                    Console.ReadLine();
                     break;
             }
             
