@@ -5,7 +5,7 @@ using System;
 
 class Game_Of_Nim
 {
-    static void Main()
+    static void Nim()
     {
        
         bool GameIsDone = true;
@@ -74,7 +74,14 @@ class Game_Of_Nim
                     int P2_Pile = rnd.Next(1, 3);
 
                     Console.WriteLine("My Turn, I chose pile " + P2_Pile + ", and " + P2_Beads + " beads.");
-                    
+                    if (Pile_1 == 0) //Added so player cant just spam one pile until they can pick the other pile 2 win.
+                    {
+                        P2_Pile = 2;
+                    }
+                    else if (Pile_2 == 0)
+                    {
+                        P2_Pile = 1;
+                    }
                     if (P2_Pile == 1)
                     {
                         Pile_1 = Pile_1 - P2_Beads;

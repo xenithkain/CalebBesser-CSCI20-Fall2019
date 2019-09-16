@@ -17,7 +17,7 @@ class MainClass
 
         Thrown = Console.ReadLine();
         
-        //These use rnd to find
+        //These use rnd to find the computers choice
         switch (rnd)
         {
             case 0:
