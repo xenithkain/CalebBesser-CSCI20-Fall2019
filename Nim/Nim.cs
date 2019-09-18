@@ -5,7 +5,7 @@ using System;
 
 class Game_Of_Nim
 {
-    static void Main()
+    static void Nim()
     {
        
         bool GameIsDone = true;
