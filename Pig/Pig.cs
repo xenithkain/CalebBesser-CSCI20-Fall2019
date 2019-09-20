@@ -2,7 +2,7 @@
 
 class Pig_Dice_Game
 {
-    static void Main()
+    static void Pig()
     {
         int Turn = 1;
 

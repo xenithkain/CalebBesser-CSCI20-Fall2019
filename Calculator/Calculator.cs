@@ -6,15 +6,16 @@ using System;
 
 class Calculator_Code
 {
-    static void Main()
+    static void Calculator()
     {
         //Declaring my variables, i need to have the user inputs and the answer. (Note, need a var for the while loop)
         float Answer = 0;
         int Num1, Num2;
-        string Operator, Done_Answer;      
-        bool Done = false;
+        string Operator;
+        string Continue = "Yes";     
+        
         //Will loop the code untill user says otherwise.
-        while (Done == false)
+        while (Continue == "Yes")
         {
             //Gets the user inputs for both numbers, and the operator.
             Console.WriteLine("Please in put your first number.");
@@ -32,11 +33,8 @@ class Calculator_Code
             
             //Will ask user if they wish to continue, if not, it ends the loop. Ending the code.
             Console.WriteLine("Do you wish to continue. Yes, or No.");
-            Done_Answer = Console.ReadLine();
-            if (Done_Answer == "No")
-            {
-                Done = true;
-            }
+            Continue = Console.ReadLine();
+            
         }
         Console.WriteLine("GoodBye.");
         Console.ReadLine();
