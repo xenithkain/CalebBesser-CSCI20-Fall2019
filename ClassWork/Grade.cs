@@ -1,8 +1,8 @@
 ﻿using System;
 
-class Grade
+class Grade_Code
 {
-    static void Main()
+    static void Grade()
     {
         Console.WriteLine("What is your grade in percent?");
         int Grade = int.Parse(Console.ReadLine());

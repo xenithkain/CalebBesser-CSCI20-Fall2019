@@ -4,7 +4,7 @@
 the player whether they won or not */
 using System;
 
-class MainClass
+class RockPaperScissors_Code
 {
 
     static void RockPaperScissors()
