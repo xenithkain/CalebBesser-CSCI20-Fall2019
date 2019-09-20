@@ -4,10 +4,10 @@
 the player whether they won or not */
 using System;
 
-class MainClass
+class RockPaperScissors_Code
 {
 
-    static void R_P_S ()
+    static void RockPaperScissors()
     {
         string Thrown, Comp_Thrown;
         var random = new Random();
