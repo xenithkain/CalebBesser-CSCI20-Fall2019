@@ -2,7 +2,7 @@
 
 class Pig_Dice_Game
 {
-    static void Pig()
+    static void Main()
     {
         int Turn = 1;
 
@@ -24,7 +24,7 @@ class Pig_Dice_Game
 
         if (P1_Choice == "Roll")
         {
-            P1_Total = P1_Total + Dice;
+            _ = P1_Total + Dice;
         }
         else if (P1_Choice == "Pass")
         {
