@@ -5,7 +5,7 @@ using System;
 
 class Combination_Code
 {
-    static void Main()
+    static void Combo()
     {
         //Declaring variables, make the 3 random numbers.
         int Guess1, Guess2, Guess3;
@@ -25,7 +25,7 @@ class Combination_Code
         //This loop goes till all guessed #s and = to the ranomd #s.
         //it checks  in the loop for all the possiblities and gives  a response accordingly. This is how i hint the player.
         while (Guess1 != Num1 || Guess2 != Num2 || Guess3 != Num3)
-        {           
+        {
             if (Guess1 == Num1) 
             {
                 Console.WriteLine("Your first number is correct.");               
