@@ -2,7 +2,7 @@
 
 class RPG
 {
-    static void Main()
+    static void Rpg_Code()
     {
         bool Game_Over = false;
         string Player_Character_Type, Player_Weapon;
