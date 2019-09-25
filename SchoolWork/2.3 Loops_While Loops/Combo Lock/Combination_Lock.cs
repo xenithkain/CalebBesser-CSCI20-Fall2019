@@ -5,7 +5,7 @@ using System;
 
 class Combination_Code
 {
-    static void Combo()
+    static void Comb()
     {
         //Declaring variables, make the 3 random numbers.
         int Guess1, Guess2, Guess3;
