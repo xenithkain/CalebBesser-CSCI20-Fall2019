@@ -115,15 +115,16 @@ namespace RPG
             {
                 case "Right":
                 {
-
+                        Console.WriteLine("You head walk towards the Gym, as you approach you see the door slightly ajar. Peeking through you see everyones already seated. As quietly as possible you open the door and sneak in. ");
+                        break;
                 }
                 case "Left":
-                {    
-
+                {
+                        break;
                 }
                 case "Forward":
                 {
-
+                        break;
                 }
             }
 
