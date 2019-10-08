@@ -7,46 +7,93 @@ namespace CellInvader
 {
     class Cell_Invader
     {
-        static void CellI()
+        static void CellInvade()
         {
-            int[,] Owned = { { 0, 0, 0, 0, 0 }, { 0, 0, 0, 2, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
-            int[,] Cells_Size = { { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
+            int Turn = 1;
+            int P1_Y, P1_X, P1_Point_Choice;
+            int P2_Point_Total = 10;
+            int P1_Point_Total = 10;
+            int Game_State = 0;
+            int[,] Owned = { { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
+            int[,] Cells_Size = { { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };          
+            
 
-
-            for (int y = 0; y < 5; y++)
+            while (Game_State == 0)
             {
-                Console.WriteLine("");
-                for (int x = 0; x < 5; x++)
+                Console.WriteLine("----------------");
+
+                for (int y = 0; y < 5; y++)
                 {
-                    if (Owned[y, x] == 1)
+                    Console.WriteLine("");
+                    for (int x = 0; x < 5; x++)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write(Cells_Size[y, x]);
-                        Console.Write("  ");
-                    }
-                    else if (Owned[y, x] == 2)
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.Write(Cells_Size[y, x]);
-                        Console.Write("  ");
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write(Cells_Size[y, x]);
-                        Console.Write("  ");
+                        if (Owned[y, x] == 1)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write(Cells_Size[y, x]);
+                            Console.Write("  ");
+                        }
+                        else if (Owned[y, x] == 2)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.Write(Cells_Size[y, x]);
+                            Console.Write("  ");
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write(Cells_Size[y, x]);
+                            Console.Write("  ");
+                        }
                     }
                 }
+                Console.WriteLine("");
+                Console.WriteLine("----------------");
+                int P1_Choice_Is_Right = 0;
+                do
+                {
+                    do
+                    {
+                        Console.WriteLine("Player 1 choose an action, Distribute, Move, Pass.");
+                        string Player1_Choice = Console.ReadLine();
+                        switch (Player1_Choice)
+                        {
+                            case "Distribute":
+                                {
+                                    Console.WriteLine("Choose a cell, write the y coordinate than x.");
+                                    P1_Y = int.Parse(Console.ReadLine());
+                                    P1_X = int.Parse(Console.ReadLine());
+                                    
+                                    Console.WriteLine("Now how much do you want to move there?");
+                                    P1_Point_Choice = int.Parse(Console.ReadLine());
+
+                                    if (Cells_Size[P1_Y, P1_X] == Cells_Size[0, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[1, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[2, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[3, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[4, 0])
+                                    {
+                                        Cells_Size[P1_Y, P1_X] = Cells_Size[P1_Y, P1_X] + P1_Point_Choice;
+                                    }
+                                    P1_Choice_Is_Right = 1;
+                                    Owned[P1_Y, P1_X] = 1;
+                                    break;
+                                }
+                            case "Move":
+                                {
+                                    break;
+                                }
+                            case "Pass":
+                                {
+                                    break;
+                                }
+                        }
+                        Console.WriteLine("Do you wish to end your turn? Type yes if so, if not just hit enter.");
+                        string P1_Turn_Choice = Console.ReadLine();
+                        if (P1_Turn_Choice == "Yes")
+                        {
+                            Turn = 2;
+                        }
+                    } while (P1_Choice_Is_Right == 0);
+                } while (Turn == 1);
             }
             Console.ReadLine();
         }
     }
 }
-/*Console.WriteLine("-----------------");
-Console.WriteLine("{0} {1} {2} {3} {4}", Cells_Size[0], Cells_Size[1], Cells_Size[2], Cells_Size[3], Cells_Size[4]);
-Console.WriteLine("{0} {1} {2} {3} {4}", Cells_Size[5], Cells_Size[6], Cells_Size[7], Cells_Size[8], Cells_Size[9]);
-Console.WriteLine("{0} {1} {2} {3} {4}", Cells_Size[10], Cells_Size[11], Cells_Size[12], Cells_Size[13], Cells_Size[14]);
-Console.WriteLine("{0} {1} {2} {3} {4}", Cells_Size[15], Cells_Size[16], Cells_Size[17], Cells_Size[18], Cells_Size[19]);
-Console.WriteLine("{0} {1} {2} {3} {4}", Cells_Size[20], Cells_Size[21], Cells_Size[22], Cells_Size[23], Cells_Size[24]);
-Console.Write("-----------------");
-Console.ReadLine();  */ 

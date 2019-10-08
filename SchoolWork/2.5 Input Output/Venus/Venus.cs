@@ -30,7 +30,7 @@ class Meteors
         string meteor = read.ReadLine();
         Console.WriteLine(meteor);
         
-        //This takes the inputted file, and splittings the things sperated by commas.
+        //This takes the inputted file, and splits the things sperated by commas.
         string[] Allowed_Meteors = meteor.Split(splitter);
         Console.WriteLine("File Created: Eligible Craters.txt");
         write.WriteLine("Eligible Craters: ");
