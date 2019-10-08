@@ -6,7 +6,7 @@ using System.Linq;
 
 class Value_Counting
 {
-    static void Main()
+    static void ValueCounting()
     {
         //Here i call my variable. Two arrays, one for the numbers, and one for the amount of each number.
         int j = 0;
