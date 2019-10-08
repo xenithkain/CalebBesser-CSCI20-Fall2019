@@ -7,7 +7,7 @@ using System.Linq;
 
 class Meteors
 {
-    static void Main()
+    static void Meteors_code()
     {
         //These are my variables, the splitter array is to get each individual number.
         char[] splitter = { ',',' ',':',';','.'};
