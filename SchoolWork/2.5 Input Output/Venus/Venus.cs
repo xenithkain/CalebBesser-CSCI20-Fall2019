@@ -7,34 +7,34 @@ using System.Linq;
 
 class Meteors
 {
-    static void Meteors_code()
+    static void meteorscode()
     {
         //These are my variables, the splitter array is to get each individual number.
-        char[] splitter = { ',',' ',':',';','.'};
+        char[] splitter = { ',', ' ', ':', ';', '.' };
         string File_Path_Input;
-       
+
         //This is to get the user input of a file path.
         Console.WriteLine("What is the path of the file you wish to read meteors from? Remember to add the file itself at the end of the path.");
         File_Path_Input = Console.ReadLine();
 
         //This opens a stream for writing the output.
         StreamWriter write;
-        
+
         //This makes the file.
         write = new StreamWriter("Eligible Craters.txt");
-        
+
         //This opens a stream to the users inputted path.
         StreamReader read = new StreamReader(File_Path_Input);
-        
+
         //This reads the file the user inputted.
         string meteor = read.ReadLine();
         Console.WriteLine(meteor);
-        
+
         //This takes the inputted file, and splits the things sperated by commas.
         string[] Allowed_Meteors = meteor.Split(splitter);
         Console.WriteLine("File Created: Eligible Craters.txt");
         write.WriteLine("Eligible Craters: ");
-        
+
         //This loops through for each number in the file.
         foreach (var Number in Allowed_Meteors)
         {
@@ -45,8 +45,8 @@ class Meteors
                 if (result >= 60)
                 {
                     write.WriteLine(Number + "km");
-                }              
-            }          
+                }
+            }
         }
 
         //Then i close both streams.

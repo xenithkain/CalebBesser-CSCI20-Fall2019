@@ -5,7 +5,7 @@ using System;
 
 class Pascals_Triangle
 {
-    static void Main()
+    static void triangle()
     {
         //I ask for the number of rows they want.
         Console.Write("Type the number of rows you wish to have in your triangle: ");

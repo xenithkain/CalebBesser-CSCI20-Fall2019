@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\SchoolWork"
+    "\\SchoolWork",
+    "\\SchoolWork\\2.5 Input Output",
+    "\\SchoolWork\\2.5 Input Output\\Venus"
   ],
-  "SelectedNode": "\\SchoolWork\\2.4 For Loops",
+  "SelectedNode": "\\SchoolWork\\2.5 Input Output\\Venus\\Venus.cs",
   "PreviewInSolutionExplorer": false
 }
