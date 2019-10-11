@@ -100,12 +100,12 @@ namespace RPG
             }
             Console.WriteLine("Okay, so your stats are Health " + Player_Health + ", Energy " + Player_Energy + ", Strength " + Player_Strength + ", Speed " + Player_Speed + ", Defense " + Player_Defense + ", Charisma " + Player_Charisma + ". Now we can continue on with the story.");
 
-            Room Gym = new Room("", 0, 6, "Gym");
-            Room Cafeteria = new Room("", 0, 2, "Cafeteria");
-            Room School_Entrance = new Room("", 0, 11, "Entrance");
-            Room School_Exit = new Room("", 0, 15, "Exit");
-            Room[] Classes = new Room[5];
-            Room[] Field = new Room[4];
+            Rooms Gym = new Rooms("", 0, 6, "Gym");
+            Rooms Cafeteria = new Rooms("", 0, 2, "Cafeteria");
+            Rooms School_Entrance = new Rooms("", 0, 11, "Entrance");
+            Rooms School_Exit = new Rooms("", 0, 15, "Exit");
+            Rooms[] Classes = new Rooms[5];
+            Rooms[] Field = new Rooms[4];
 
 
             Console.WriteLine("You are a student at Delkings High, a prestigious school for teens with powers. Right now your late for the opening ceremony at the Gym. As you walk though the entrance of the school, to your Left is the Gym. Right and Forward are Hallways. Which way do you choose?");

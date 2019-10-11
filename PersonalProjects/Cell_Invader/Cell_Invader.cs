@@ -7,7 +7,7 @@ namespace CellInvader
 {
     class Cell_Invader
     {
-        static void CellInvade()
+        static void Main()
         {
             int Turn = 1;
             int P1_Y, P1_X, P1_Point_Choice;
