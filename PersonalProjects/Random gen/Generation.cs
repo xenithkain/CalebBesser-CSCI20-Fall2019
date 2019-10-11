@@ -7,7 +7,7 @@ namespace RandomGen
 {
     class Generation
     {
-        public static void Main()
+        public static void rg()
         {
             
             Random Color = new Random();

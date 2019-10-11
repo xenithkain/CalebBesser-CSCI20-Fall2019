@@ -5,7 +5,7 @@ using System;
 
 class Game_Of_Nim
 {
-    static void Nim()
+    static void Main()
     {
        
         bool GameIsDone = true;
@@ -14,106 +14,104 @@ class Game_Of_Nim
         int Turn = 1;
         int P1_Beads, P1_Pile;
         //This loop keeps the game going untill both pile are to 0
-        while (GameIsDone = true)
+        while (Pile_1 > 0 || Pile_2 > 0 )
         {
-            switch (Turn)
+            Turn = 1;
+            if (Turn == 1)
             {
-                //This is player 1's code, it stops the loop and says player 1 wins if the piles hit zero on his turn
-                case 1:
-                    Console.Write("Your turn, which pile do you choose? 1 or 2? ");
-                    P1_Pile = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("Your turn, how man will you take? 1,2, or 3? ");
-                    P1_Beads = Convert.ToInt32(Console.ReadLine());                 
-                    if (Pile_1 == 0) //Added so player cant just spam one pile until they can pick the other pile 2 win.
-                    {
-                        P1_Pile = 2;
-                    }
-                    else if (Pile_2 == 0)
-                    {
-                        P1_Pile = 1;
-                    }
-                    if (P1_Pile > 2) //Added to stop player from being able to pick more than 3 beads.
-                    {
-                        P1_Pile = 2; 
-                    }
-                    if (P1_Beads > 3)
-                    {
-                        P1_Beads = 3;
-                    }
-                   
-                    if (P1_Pile == 1)
-                    {
-                        Pile_1 = Pile_1 - P1_Beads;
-                    }
-                    else
-                    {
-                        Pile_2 = Pile_2 - P1_Beads;
-                    }
+                //This is player 1's code, it stops the loop and says player 1 wins if the piles hit zero on his turn                
+                Console.Write("Your turn, which pile do you choose? 1 or 2? ");
+                P1_Pile = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Your turn, how man will you take? 1,2, or 3? ");
+                P1_Beads = Convert.ToInt32(Console.ReadLine());
+                if (Pile_1 == 0) //Added so player cant just spam one pile until they can pick the other pile 2 win.
+                {
+                    P1_Pile = 2;
+                }
+                else if (Pile_2 == 0)
+                {
+                    P1_Pile = 1;
+                }
+                if (P1_Pile > 2) //Added to stop player from being able to pick more than 3 beads.
+                {
+                    P1_Pile = 2;
+                }
+                if (P1_Beads > 3)
+                {
+                    P1_Beads = 3;
+                }
 
-                    if (Pile_1 <= 0) //Added to both player 1 and 2, to stop pile count from going into negatives.
-                    {
-                        Pile_1 = 0;
-                    }
-                    else if (Pile_2 <= 0)
-                    {
-                        Pile_2 = 0;
-                    }
+                if (P1_Pile == 1)
+                {
+                    Pile_1 = Pile_1 - P1_Beads;
+                }
+                else
+                {
+                    Pile_2 = Pile_2 - P1_Beads;
+                }
+
+                if (Pile_1 <= 0) //Added to both player 1 and 2, to stop pile count from going into negatives.
+                {
+                    Pile_1 = 0;
+                }
+                else if (Pile_2 <= 0)
+                {
+                    Pile_2 = 0;
+                }
+                if (Pile_1 > 0 || Pile_2 > 0)
+                {
                     Console.WriteLine("Pile 1 has " + Pile_1 + " beads left. Pile 2 has " + Pile_2 + " beads left.");
-                    if (Pile_1 == 0 && Pile_2 == 0)
-                    {
-                        GameIsDone = false;
-                        Console.WriteLine("Player 1 Wins!");
-                        Console.ReadLine();
-                    }
                     Turn = 2;
-                    break;
+                }
+                else if (Pile_1 <= 0 || Pile_2 <= 0)
+                {
+                    Console.WriteLine("Player 1 Wins!");
+                }                         
                 //This is Player 2's code, does the same as 1, but the value for its pile and beads choice, is made by random.
-                case 2:
-                    Random rnd = new Random();  //added to player 2's code, from top, to fix it not creating a new random every loop                  
-                    int P2_Beads = rnd.Next(1, 4);
-                    int P2_Pile = rnd.Next(1, 3);
-
-                    Console.WriteLine("My Turn, I chose pile " + P2_Pile + ", and " + P2_Beads + " beads.");
-                    if (Pile_1 == 0) //Added so player cant just spam one pile until they can pick the other pile 2 win.
-                    {
-                        P2_Pile = 2;
-                    }
-                    else if (Pile_2 == 0)
-                    {
-                        P2_Pile = 1;
-                    }
-                    if (P2_Pile == 1)
-                    {
-                        Pile_1 = Pile_1 - P2_Beads;
-                    }
-                    else
-                    {
-                        Pile_2 = Pile_2 - P2_Beads;
-                    }                    
-                    if (Pile_1 <= 0) 
-                    {
-                        Pile_1 = 0;
-                    }
-                    if (Pile_2 <= 0)
-                    {
-                        Pile_2 = 0;
-                    }
-                    Console.WriteLine("Pile 1 has " + Pile_1 + " beads left. Pile 2 has " + Pile_2 + " beads left.");
-                    if (Pile_1 == 0 && Pile_2 == 0)
-                    {
-                        GameIsDone = false;
-                        Console.WriteLine("I Win!");
-                        Console.ReadLine();
-                    }
-                    Turn = 1;
-                    break;
-                default:
-                    Console.WriteLine("You inputted something wrong, plz restart and try again.");
-                    Console.ReadLine();
-                    break;
             }
-            
+            if (Turn == 2)
+            { 
+                Random rnd = new Random();  //added to player 2's code, from top, to fix it not creating a new random every loop                  
+                int P2_Beads = rnd.Next(1, 4);
+                int P2_Pile = rnd.Next(1, 3);
+
+                Console.WriteLine("My Turn, I chose pile " + P2_Pile + ", and " + P2_Beads + " beads.");
+                if (Pile_1 == 0) //Added so player cant just spam one pile until they can pick the other pile 2 win.
+                {
+                    P2_Pile = 2;
+                }
+                else if (Pile_2 == 0)
+                {
+                    P2_Pile = 1;
+                }
+                if (P2_Pile == 1)
+                {
+                    Pile_1 = Pile_1 - P2_Beads;
+                }
+                else
+                {
+                    Pile_2 = Pile_2 - P2_Beads;
+                }                    
+                if (Pile_1 <= 0) 
+                {
+                    Pile_1 = 0;
+                }
+                if (Pile_2 <= 0)
+                {
+                    Pile_2 = 0;
+                }
+                if (Pile_1 > 0 || Pile_2 > 0)
+                {
+                    Console.WriteLine("Pile 1 has " + Pile_1 + " beads left. Pile 2 has " + Pile_2 + " beads left.");
+                    Turn = 1;
+                }
+                else if (Pile_1 <= 0 || Pile_2 <= 0)
+                {
+                    Console.WriteLine("Player 2 Wins!");
+                }                     
+            }           
         }
+        
         Console.ReadLine();
     }
 }
