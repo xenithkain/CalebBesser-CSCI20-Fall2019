@@ -7,10 +7,10 @@ namespace CellInvader
 {
     class Cell_Invader
     {
-        static void cell()
+        static void Main()
         {
             int Turn = 1;
-            int P1_Y, P1_X, P1_Point_Choice;
+            int P1_Y, P1_X, P1_Point_Choice, P1_Y_To, P1_X_To;
             int P2_Point_Total = 10;
             int P1_Point_Total = 10;
             int Game_State = 0;
@@ -54,7 +54,7 @@ namespace CellInvader
                 {
                     do
                     {
-                        Console.WriteLine("Player 1 choose an action, Distribute, Move, Pass.");
+                        Console.WriteLine("Player 1 choose an action, Distribute, Move, Take, Pass.");
                         string Player1_Choice = Console.ReadLine();
                         switch (Player1_Choice)
                         {
@@ -66,20 +66,47 @@ namespace CellInvader
                                     
                                     Console.WriteLine("Now how much do you want to move there?");
                                     P1_Point_Choice = int.Parse(Console.ReadLine());
-
-                                    if (Cells_Size[P1_Y, P1_X] == Cells_Size[0, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[1, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[2, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[3, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[4, 0])
+                                    if (P1_Point_Choice <= P1_Point_Total)
                                     {
-                                        Cells_Size[P1_Y, P1_X] = Cells_Size[P1_Y, P1_X] + P1_Point_Choice;
+                                        if (Cells_Size[P1_Y, P1_X] == Cells_Size[0, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[1, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[2, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[3, 0] || Cells_Size[P1_Y, P1_X] == Cells_Size[4, 0])
+                                        {
+                                            Cells_Size[P1_Y, P1_X] = Cells_Size[P1_Y, P1_X] + P1_Point_Choice;
+                                        }
+                                        P1_Choice_Is_Right = 1;
+                                        Owned[P1_Y, P1_X] = 1;
                                     }
-                                    P1_Choice_Is_Right = 1;
-                                    Owned[P1_Y, P1_X] = 1;
+                                    else 
+                                    {
+                                        Console.WriteLine("You don't have that many points.");
+                                    }
                                     break;
                                 }
                             case "Move":
                                 {
+                                    Console.WriteLine("Choose a cell to move from. Y coord then X.");
+                                    P1_Y = int.Parse(Console.ReadLine());
+                                    P1_X = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("Choose a cell to move to. Y coord then X.");
+                                    P1_Y_To = int.Parse(Console.ReadLine());
+                                    P1_X_To = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("How many points do you wish to move?");
+                                    P1_Point_Choice = int.Parse(Console.ReadLine());
+                                    if (P1_Point_Choice <= Cells_Size[P1_Y, P1_X])
+                                    {
+                                        Cells_Size[P1_Y, P1_X] = Cells_Size[P1_Y, P1_X] - P1_Point_Choice;
+                                        Cells_Size[P1_Y_To, P1_X_To] = Cells_Size[P1_Y_To, P1_X_To] + P1_Point_Choice;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Your Cell doesn't have that many points.");
+                                    }
                                     break;
                                 }
                             case "Pass":
+                                {
+                                    break;
+                                }
+                            case "Take":
                                 {
                                     break;
                                 }
