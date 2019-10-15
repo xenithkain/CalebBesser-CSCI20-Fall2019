@@ -7,27 +7,31 @@ namespace RandomGen
 {
     class Generation
     {
-        public static void RG()
+        public static void rg()
         {
             
-            //Random Color = new Random();         
+            Random Color = new Random();
+            
             Console.Write("Bottom: ");
             int Bottom = int.Parse(Console.ReadLine());            
             
             Console.Write("Length: ");
             int Length = int.Parse(Console.ReadLine());
-
-            //int Height = Color.Next(4, Bottom);
-            
+           
+            int Height = Color.Next(4, Bottom);
+      
             for (int i = 0; i < Length; i++)
             {
-                Console.SetCursorPosition(i, Bottom);
-                Console.BackgroundColor = ConsoleColor.Red;
-                for(int j = 0; j < 10; j++)
+                int j = 0;
+                Console.CursorLeft = i;
+                Console.BackgroundColor = (ConsoleColor)Color.Next(0, 16);                
+                do
                 {
-                    Console.CursorTop = Bottom - j;
-                    Console.WriteLine(" ");
-                }
+                    Console.CursorTop = Height + j;
+                    Console.Write(" ");
+                    j++;
+
+                } while (j != Bottom);
             }
 
 
