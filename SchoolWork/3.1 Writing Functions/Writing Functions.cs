@@ -14,10 +14,11 @@ class Menu
         string[] Menu = { "Steak", "Pork", "Chicken", "Soda", "Eggs", "Bacon", "Pancakes", "Fries", "Salad"};
         string[] Price = { "10.00$", "9.00$", "9.00$", "1.75$", "4.00$", "3.00$", "6.00$", "3.00$", "4.00$" };
         //This calls the function for making the menu.
-        Menu_Print(Menu, Price);
+        
         //This keeps looping asking for inputs untill the user is done ordering.
         for (int i = 0; Ordering == true; i++)
         {
+            Menu_Print(Menu, Price);
             Console.WriteLine("What would you like? Pick by item number.");
             Choice[i] = int.Parse(Console.ReadLine());
             Console.WriteLine("Okay, Anything else? Yes, No.");
