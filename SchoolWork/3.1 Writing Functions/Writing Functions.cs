@@ -5,7 +5,7 @@ using System;
 
 class Menu
 { 
-    static void Main()
+    static void Menu_Code()
     {
         //All of my variables.
         int Number_Of_Choices = 0;
