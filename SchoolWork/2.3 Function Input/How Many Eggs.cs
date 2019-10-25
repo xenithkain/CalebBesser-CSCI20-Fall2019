@@ -9,7 +9,7 @@ class Eggs
     //Main Function
     //This function will take the user input of the amount of dozens.
     //Then i will call the Counting function.
-    static void Main()
+    static void Egg_Code()
     {
         Console.WriteLine("How many dozens do you have?");
         int Dozens = int.Parse(Console.ReadLine());
