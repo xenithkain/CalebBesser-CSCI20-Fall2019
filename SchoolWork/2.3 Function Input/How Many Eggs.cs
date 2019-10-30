@@ -3,17 +3,18 @@
 //This code will take a number of dozens of eggs, then tell you how many eggs that is.
 using System;
 
-class Eggs
+class Eggs_Code
 {
 
     //Main Function
     //This function will take the user input of the amount of dozens.
     //Then i will call the Counting function.
-    static void Egg_Code()
+    static void Main()
     {
         Console.WriteLine("How many dozens do you have?");
         int Dozens = int.Parse(Console.ReadLine());
-        Egg_Count(Dozens);
+        int Eggs = Egg_Count(Dozens);
+        Console.WriteLine("You have " + Eggs + " Eggs.");
         Console.ReadLine();
     }
 
@@ -21,9 +22,10 @@ class Eggs
     //Will take the Input from Main. The number of Dozens.
     //It will then multiply that number by 12 to get the amount of eggs.
     //Then it will Console.WriteLine the output.
-    static void Egg_Count(int _Dozens)
+    static int Egg_Count(int _Dozens)
     {
         _Dozens = _Dozens * 12;
-        Console.WriteLine("You have " + _Dozens + " Eggs.");
+        int Eggs = _Dozens;
+        return Eggs;
     }
 }

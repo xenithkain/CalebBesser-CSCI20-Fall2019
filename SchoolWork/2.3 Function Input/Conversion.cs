@@ -6,7 +6,7 @@ using System;
 class Conversion
 {
 
-    static void Main()
+    static void Con()
     {
         Console.WriteLine("How would you like to convert?");
         Console.WriteLine("Inches - Centimeters, Inches - Feet, Gallons - Liters, Liters - Ounces");
