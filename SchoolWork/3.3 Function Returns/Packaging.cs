@@ -49,7 +49,7 @@ class Pack
         Packing[5] = (Packing[2] * w) / 2.54f;
         float Mass = v * d;
         Packing[6] = Mass;
-        Packing[7] =  Mass * 9.8f;
+        Packing[7] =  (Mass * 9.8f) / 16f;
 
         return Packing;
     }
@@ -58,4 +58,4 @@ class Pack
     //Then it will find the area of all the glasses right next to each other. Basically a cube. Then it will add up all the the cups weight.
     //Then i will return the weight and size.
 }
-
+//The output will be a list of all the differnt things. Size and weight of box, and the arrangement of the glasses.
