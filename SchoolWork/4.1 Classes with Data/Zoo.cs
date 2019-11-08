@@ -11,7 +11,7 @@ class Zoo
         public string Dinner_Hour;
     }
     //My main function
-    static void Main()
+    static void Zoos()
     {
         //Here i make the first animal
         Animal Tiger = new Animal();
