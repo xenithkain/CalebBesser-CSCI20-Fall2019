@@ -13,7 +13,7 @@ class Pack
     //Here i will open a stream to get the file then i will read through the file to get the numbers for the glass. Ill probably assign these to variables, so i could change them if i wanted to.
     //Then i will call the the packaging function wich will take the dimensions from the text doc and will do a calc to see how many will fit.
     //Then i will output the size and weight.
-    static void Packing()
+    static void Packs()
     {
         float[] Packing = new float[8];
         char[] Splitter = { ',' };
@@ -49,7 +49,7 @@ class Pack
         Packing[5] = (Packing[2] * w) / 2.54f;
         float Mass = v * d;
         Packing[6] = Mass;
-        Packing[7] =  (Mass * 9.8f) / 16f;//weight
+        Packing[7] =  (Mass * 9.8f) / 16f;
 
         return Packing;
     }
