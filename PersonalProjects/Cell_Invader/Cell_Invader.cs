@@ -7,7 +7,7 @@ namespace CellInvader
 {
     class Cell_Invader
     {
-        static void cells()
+        static void Main()
         {
             int Turn = 1;
             int P1_Y, P1_X, P1_Point_Choice, P1_Y_To, P1_X_To, P2_Y, P2_X, P2_Y_To, P2_X_To, P2_Point_Choice;
@@ -29,7 +29,9 @@ namespace CellInvader
                     Console.WriteLine("Player 1 choose an action, Distribute, Move, Take, Pass.");
                     string Player1_Choice = Console.ReadLine();
                     //Player 1 Turn Choice                                    
-                    Turn_Take(1, 0, 0, 0, 0, 0, Owned, Cells_Size, Cells_Number, Player1_Choice, P1_Point_Total, 0);  
+                    Turn_Take(1, 0, 0, 0, 0, 0, Owned, Cells_Size, Cells_Number, Player1_Choice, P1_Point_Total, 0);
+                    Console.Clear();
+                    GameBoard(Owned, Cells_Size);
                     Console.WriteLine("Your total is " + P1_Point_Total + " Do you wish to end your turn? Type yes if so, if not just hit enter.");
                     string P1_Turn_Choice = Console.ReadLine();
                     if (P1_Turn_Choice == "Yes")

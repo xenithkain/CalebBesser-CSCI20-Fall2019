@@ -31,7 +31,7 @@ class Record
     //This function will do all the work as i don't think i need a serperate function for this .
     //It takes the files you give it as inputs. It uses the original file, then after that will loop asking you for a file each time.
     //Then when you are all done it will output the list.
-    static void Main()
+    static void Cust()
     {
         string Customers = "Yes";
         Customer[] List = new Customer[100];
