@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+//Caleb Besser
+//11-15-2019
+//This code will generate 2 different card objects, then tell you information about them. You can press enter to generate a new pair.
 class Cards
 {
     private string suit;
