@@ -13,33 +13,26 @@ class Rain
     }
     public struct Rectangle
     {
-        public Vector a;
-        public Vector b;
-        public Vector c;
-        public Vector d;
+        public Vector Point1;
+        public Vector Point2;
+        public Vector Point3;
+        public Vector Point4;
     }
     
     public static void Draw_Rectangle(Vector a, Vector b, Vector c, Vector d)
     {
         Console.BackgroundColor = ConsoleColor.White;
-        for(int i = 0; i <= b.x; i++)
-        {
-            Console.SetCursorPosition(a.x + i, a.y);
-            Console.WriteLine(" ");
-        }
-        for(int i = 0; i < c.y; i++)
-        {
-            Console.SetCursorPosition(b.x, b.y + i);
-            Console.WriteLine(" ");
-        }
-        for(int i = 0; i > d.x; i++)
-        {
-            Console.SetCursorPosition(c.x - i, c.y); ;
-            Console.WriteLine(" ");
-        }
+        Console.SetCursorPosition(a.x, a.y);
+        Console.WriteLine(" ");
+        Console.SetCursorPosition(b.x, b.y);
+        Console.WriteLine(" ");
+        Console.SetCursorPosition(c.x, c.y);
+        Console.WriteLine(" ");
+        Console.SetCursorPosition(d.x, d.y);
+        Console.WriteLine(" ");
     }
 
-    public static void Rect()
+    public static void Rectv()
     {
         Vector[] Points = new Vector[5];
         Random rnd = new Random();
@@ -48,15 +41,15 @@ class Rain
         int xrnd2 = rnd.Next(21, 31);
         int yrnd2 = rnd.Next(21, 31);
         Rectangle rect = new Rectangle();
-        rect.a.x = xrnd1;
-        rect.a.y = yrnd1;
-        rect.b.x = xrnd2;
-        rect.b.y = yrnd1;
-        rect.c.x = xrnd1;
-        rect.c.y = yrnd2;
-        rect.d.x = xrnd2;
-        rect.d.y = yrnd2;
-        Draw_Rectangle(rect.a, rect.b, rect.c, rect.d);
+        rect.Point1.x = xrnd1;
+        rect.Point1.y = yrnd1;
+        rect.Point2.x = xrnd2;
+        rect.Point2.y = yrnd1;
+        rect.Point3.x = xrnd1;
+        rect.Point3.y = yrnd2;
+        rect.Point4.x = xrnd2;
+        rect.Point4.y = yrnd2;
+        Draw_Rectangle(rect.Point1, rect.Point2, rect.Point3, rect.Point4);
         Console.ReadLine();
 
 
