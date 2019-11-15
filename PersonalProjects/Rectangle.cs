@@ -32,7 +32,7 @@ class Rain
         Console.WriteLine(" ");
     }
 
-    public static void Main()
+    public static void Rectv()
     {
         Vector[] Points = new Vector[5];
         Random rnd = new Random();
