@@ -296,7 +296,7 @@ class Cards
 }
 class MainClass
 {
-    static void Main()
+    static void Cardss()
     {
         bool Continue = true;
         Random rnd = new Random();
