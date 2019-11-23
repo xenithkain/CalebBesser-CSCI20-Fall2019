@@ -3,239 +3,478 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CellInvader
+
+class Cell_Invader
 {
-    class Cell_Invader
+    static void Main()
     {
-        static void Main()
+        int turn = 1;
+        int P1_Point_Choice, P2_Point_Choice;
+        int P2_Point_Total = 5;
+        int P1_Point_Total = 5;
+        int Game_State = 0;
+        int[,] Cells_Number = { { 0, 1, 2, 3, 4 }, { 5, 6, 7, 8, 9 }, { 10, 11, 12, 13, 14 }, { 15, 16, 17, 18, 19 }, { 20, 21, 22, 23, 24 } };
+        int[,] Owned = { { 1, 0, 0, 0, 2 }, { 1, 0, 0, 0, 2 }, { 1, 0, 0, 0, 2 }, { 1, 0, 0, 0, 2 }, { 1, 0, 0, 0, 2 } };
+        int[,] Cells_Size = { { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
+
+        Intro();
+        while (Game_State == 0)
         {
-            int Turn = 1;
-            int P1_Y, P1_X, P1_Point_Choice, P1_Y_To, P1_X_To, P2_Y, P2_X, P2_Y_To, P2_X_To, P2_Point_Choice;
-            int P2_Point_Total = 10;
-            int P1_Point_Total = 10;
-            int Game_State = 0;
-            int[,] Cells_Number = { { 0, 1, 2, 3, 4 }, { 5, 6, 7, 8, 9 }, { 10, 11, 12, 13, 14 }, { 15, 16, 17, 18, 19 }, { 20, 21, 22, 23, 24 } };
-            int[,] Owned = { { 1, 0, 0, 0, 2 }, { 1, 0, 0, 0, 2 }, { 1, 0, 0, 0, 2 }, { 1, 0, 0, 0, 2 }, { 1, 0, 0, 0, 2 } };
-            int[,] Cells_Size = { { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
-            Console.WriteLine("Type 1 to play 2 player, type 2 to play vs a computer.");
-            int P1_Comp_Choice = int.Parse(Console.ReadLine());
-            GameBoard(Owned, Cells_Size);
-            //Game Start
-            while (Game_State == 0)
+            while (turn == 1)
             {
-                
-                if (Turn == 1)
+                GameBoard(P1_Point_Total, P2_Point_Total, Owned, Cells_Size);
+                Turn.Turn_Write();
+                string type = Console.ReadLine();
+                switch (type)
                 {
-                    Console.WriteLine("Player 1 choose an action, Distribute, Move, Take, Pass.");
-                    string Player1_Choice = Console.ReadLine();
-                    //Player 1 Turn Choice                                    
-                    Turn_Take(1, 0, 0, 0, 0, 0, Owned, Cells_Size, Cells_Number, Player1_Choice, ref P1_Point_Total, 0);
-                    Console.Clear();
-                    GameBoard(Owned, Cells_Size);
-                    Console.WriteLine("Your total is " + P1_Point_Total + " Do you wish to end your turn? Type yes if so, if not just hit enter.");
-                    string P1_Turn_Choice = Console.ReadLine();
-                    if (P1_Turn_Choice == "Yes")
-                    {
-                        Turn = 2;
-                        Console.Clear();
-                    }
-                    Console.Clear();
-                    GameBoard(Owned, Cells_Size);
+                    case "Distribute":
+                        {
+                            Turn.Distribute(turn, ref P1_Point_Total, ref Cells_Size, ref Owned);
+                            break;
+                        }
+                    case "Move":
+                        {
+                            Turn.Move(turn, ref Owned, ref Cells_Number, ref Cells_Size);
+                            break;
+                        }
+                    case "Pass":
+                        {
+                            turn = 2;
+                            break;
+                        }
+                    case "Cheat":
+                        {
+                            Turn.Cheat(ref Cells_Size, ref Owned);
+                            break;
+                        }
+                }
+                Console.WriteLine("Press Enter to Continue.");
+                Console.ReadLine();
+                GameBoard(P1_Point_Total, P2_Point_Total, Owned, Cells_Size);
+                Console.Clear();
+            }
+            while (turn == 2)
+            {
+                turn = 3;
+            }
+            while (turn == 3)
+            {
+                Turn.Turn_End(Owned, ref P1_Point_Total, ref P2_Point_Total, ref Cells_Size);
+                turn = 1;
+            }
+
+
+
+            //Game_State = 1;
+        }
+
+        Console.ReadLine();
+    }
+
+
+
+    public static void Intro()
+    {
+        int Player_Count;
+        Console.WriteLine("----------------");
+        Console.WriteLine("Players: 1 or 2?");
+        Console.WriteLine("----------------");
+        Player_Count = int.Parse(Console.ReadLine());
+        Console.Clear();
+
+    }
+    public static void GameBoard(int Point_Total1, int Point_Total2, int[,] Owned, int[,] Cells_Size)
+    {
+        Console.WriteLine("P1 Points: {0}        P2 Points: {1}", Point_Total1, Point_Total2);
+        Console.WriteLine("----------------");
+
+        for (int y = 0; y < 5; y++)
+        {
+            Console.WriteLine("");
+            for (int x = 0; x < 5; x++)
+            {
+                switch (Owned[y, x])
+                {
+                    case 0:
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write(Cells_Size[y, x]);
+                            Console.Write("  ");
+                            break;
+                        }
+                    case 1:
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write(Cells_Size[y, x]);
+                            Console.Write("  ");
+                            break;
+                        }
+                    case 2:
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.Write(Cells_Size[y, x]);
+                            Console.Write("  ");
+                            break;
+                        }
                 }
 
             }
-            Console.ReadLine();
         }
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("");
+        Console.WriteLine("----------------");
+    }
+}
+class Turn
+{
 
-
-        
-        
-        public static void GameBoard(int[,] Owned, int[,] Cells_Size)
+    public static void Turn_End(int[,] Owned, ref int Point_Total1, ref int Point_Total2, ref int[,] Cells_Size)
+    {
+        int P1 = 0;
+        int P2 = 0;
+        for (int y = 0; y < 5; y++)
         {
-            Console.WriteLine("----------------");
-
-            for (int y = 0; y < 5; y++)
+            for (int x = 0; x < 5; x++)
             {
-                Console.WriteLine("");
-                    for (int x = 0; x < 5; x++)
-                    {
-                        switch (Owned[y, x])
-                        {
-                            case 0:
-                                {
-                                    Console.ForegroundColor = ConsoleColor.White;
-                                    Console.Write(Cells_Size[y, x]);
-                                    Console.Write("  ");
-                                    break;
-                                }
-                            case 1:
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write(Cells_Size[y, x]);
-                                    Console.Write("  ");
-                                    break;
-                                }
-                            case 2:
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkCyan;
-                                    Console.Write(Cells_Size[y, x]);
-                                    Console.Write("  ");
-                                    break;
-                                }
-                        }
-
-                    }
+                if (Owned[y, x] == 1 || Owned[y, x] == 2)
+                {
+                    Cells_Size[y, x]++;
+                }
+                if (Owned[y, x] == 1)
+                {
+                    P1++;
+                }
+                else if (Owned[y, x] == 2)
+                {
+                    P2++;
+                }
             }
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("");
-            Console.WriteLine("----------------");
         }
-        public static void Turn_Take(int Turn, int X, int Y, int _X, int _Y, int Choice, int[,] Owned, int[,] Cells_Size, int[,] Cells_Number, string Action, ref int Point_Total, int _Choice)
-        {
-            int Choice_Right;
-            switch (Action)
-            {
-                case "Distribute":
-                    {
-                        Console.WriteLine("Choose a cell, write the y coordinate than x.");
-                        Y = int.Parse(Console.ReadLine());
-                        X = int.Parse(Console.ReadLine());
+        Point_Total1 = Point_Total1 + P1;
+        Point_Total2 = Point_Total2 + P2;
 
-                        Console.WriteLine("Now how much do you want to move there?");
-                        Choice = int.Parse(Console.ReadLine());
-                        if (Choice <= Point_Total)
+
+    }
+
+    public static void Turn_Write()
+    {
+        Console.WriteLine("----------------");
+        Console.WriteLine("What do you wish to do?");
+        Console.WriteLine("Distribute - Move - Pass");
+        Console.WriteLine("----------------");
+    }
+
+
+
+    public static void Distribute(int turn, ref int Point_Total, ref int[,] Cells_Size, ref int[,] Owned)
+    {
+        Console.WriteLine("Choose a cell.");
+        Console.Write("X: ");
+        int X = int.Parse(Console.ReadLine());
+        Console.Write("Y: ");
+        int Y = int.Parse(Console.ReadLine());
+        Console.Write("Amount to Move: ");
+        int Choice = int.Parse(Console.ReadLine());
+
+        if (turn == 1)
+        {
+            if (Choice <= Point_Total)
+            {
+                switch (Owned[Y, X])
+                {
+                    case 0:
                         {
-                            switch (Owned[Y, X])
+                            Console.WriteLine("Sorry you don't own that Cell. Move some energy there to claim it.");
+                            break;
+                        }
+                    case 1:
+                        {
+                            Cells_Size[Y, X] = Cells_Size[Y, X] + Choice;
+                            Point_Total = Point_Total - Choice;
+                            Owned[Y, X] = 1;
+                            break;
+                        }
+                    case 2:
+                        {
+                            Console.WriteLine("That's Player 2's Cell, you can't distribute to it.");
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Sorry you don't have enough energy to do that.");
+            }
+        }
+        else if (turn == 2)
+        {
+            if (Choice <= Point_Total)
+            {
+                switch (Owned[Y, X])
+                {
+                    case 0:
+                        {
+                            Console.WriteLine("Sorry you don't own that Cell. Move some energy there to claim it.");
+                            break;
+                        }
+                    case 2:
+                        {
+                            Cells_Size[Y, X] = Cells_Size[Y, X] + Choice;
+                            Point_Total = Point_Total - Choice;
+                            Owned[Y, X] = 1;
+                            break;
+                        }
+                    case 1:
+                        {
+                            Console.WriteLine("That's Player 1's Cell, you can't distribute to it.");
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Sorry you don't have enough energy to do that.");
+            }
+        }
+    }
+    public static void Move(int turn, ref int[,] Owned, ref int[,] Cells_Number, ref int[,] Cells_Size)
+    {
+        Console.WriteLine("Choose a cell to move from.");
+        Console.Write("X: ");
+        int X = int.Parse(Console.ReadLine());
+        Console.Write("Y: ");
+        int Y = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Choose a cell to move to.");
+        Console.Write("X: ");
+        int _X = int.Parse(Console.ReadLine());
+        Console.Write("Y: ");
+        int _Y = int.Parse(Console.ReadLine());
+
+        Console.Write("Amount to Move: ");
+        int Choice = int.Parse(Console.ReadLine());
+
+        if (turn == 1)
+        {
+            if (Owned[_Y, _X] == 2)
+            {
+                if (Choice < Cells_Size[Y, X])
+                {
+                    if (Choice < Cells_Size[_Y, _X])
+                    {
+                        if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                        {
+                            Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
+                        }
+                        else
+                        {
+                            Console.WriteLine("That Cell is to far away.");
+                        }
+                    }
+                    else
+                    {
+                        if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                        {
+                            Choice = Cells_Size[_Y, _X];
+                            Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
+                        }
+                        else
+                        {
+                            Console.WriteLine("That Cell is to far away.");
+                        }
+                    }
+
+                }
+                else
+                {
+                    if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                    {
+                        Choice = Cells_Size[Y, X] - 1;
+                        Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
+                    }
+                    else
+                    {
+                        Console.WriteLine("That Cell is to far away.");
+                    }
+                }
+            }
+            else if (Owned[_Y, _X] == 1 || Owned[_Y, _X] == 0)
+            {
+                switch (Owned[Y, X])
+                {
+                    case 0:
+                        {
+                            Console.WriteLine("Sorry you don't own that Cell. Try moving energy there to get it.");
+                            break;
+                        }
+                    case 1:
+                        {
+                            if (Choice < Cells_Size[Y, X])
                             {
-                                case 0:
-                                    {
-                                        Console.WriteLine("Sorry you don't own that Cell. Move some energy there to claim it.");
-                                        break;
-                                    }
-                                case 1:
-                                    {
-                                        Cells_Size[Y, X] = Cells_Size[Y, X] + Choice;
-                                        Point_Total = Point_Total - Choice;
-                                        Owned[Y, X] = 1;
-                                        Choice_Right = 1;
-                                        GameBoard(Owned, Cells_Size);
-                                        break;
-                                    }
-                                case 2:
-                                    {
-                                        Console.WriteLine("That's Player 2's Cell, you can't distribute to it.");
-                                        break;
-                                    }
+                                if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                                {
+                                    Cells_Size[Y, X] = Cells_Size[Y, X] - Choice;
+                                    Cells_Size[_Y, _X] = Cells_Size[_Y, _X] + Choice;
+                                    Owned[_Y, _X] = 1;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("That Cell is to far away.");
+                                }
+
+                            }
+                            else
+                            {
+                                if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                                {
+                                    Choice = Cells_Size[Y, X] - 1;
+                                    Cells_Size[Y, X] = Cells_Size[Y, X] - Choice;
+                                    Cells_Size[_Y, _X] = Cells_Size[_Y, _X] + Choice;
+                                    Owned[_Y, _X] = 1;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("That Cell is to far away.");
+                                }
+                            }
+                            break;
+                        }
+                    case 2:
+                        {
+                            Console.WriteLine("Sorry that is Player 2's Cell.");
+                            break;
+                        }
+                }
+            }
+        }
+        else if (turn == 2)
+        {
+            if (Owned[_Y, _X] == 1)
+            {
+                if (Choice < Cells_Size[Y, X])
+                {
+                    if (Choice < Cells_Size[Y, X])
+                    {
+                        if (Choice < Cells_Size[_Y, _X])
+                        {
+                            if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                            {
+                                Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
+                            }
+                            else
+                            {
+                                Console.WriteLine("That Cell is to far away.");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Sorry you don't have enough energy to do that.");
+                            if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                            {
+                                Choice = Cells_Size[_Y, _X];
+                                Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
+                            }
+                            else
+                            {
+                                Console.WriteLine("That Cell is to far away.");
+                            }
                         }
-                        break;
-                    }
-                case "Move":
-                    {
-                        Console.WriteLine("Choose a Cell to move from. Y coord then X.");
-                        Y = int.Parse(Console.ReadLine());
-                        X = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Choose a Cell to move to. Y coord then X.");
-                        _Y = int.Parse(Console.ReadLine());
-                        _X = int.Parse(Console.ReadLine());
-                        Console.WriteLine("How much energy do you wish to move?");
-                        Choice = int.Parse(Console.ReadLine());
-                        switch (Owned[Y, X])
-                        {
-                            case 0:
-                                {
-                                    Console.WriteLine("Sorry your Cell doesn't have enough energy to do that.");
-                                    break;
-                                }
-                            case 1:
-                                {
-                                    if (Choice <= Cells_Size[Y, X])
-                                    {
-                                        if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
-                                        {
-                                            Cells_Size[Y, X] = Cells_Size[Y, X] - Choice;
-                                            Cells_Size[_Y, _X] = Cells_Size[_Y, _X] + Choice;
-                                            Owned[_Y, _X] = 1;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("That Cell is to far away.");
-                                        }
 
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("You don't have enough energy for that.");
-                                    }
-                                    break;
-                                }
-                            case 2:
-                                {
-                                    Console.WriteLine("Sorry you don't own that Cell.");
-                                    break;
-                                }
-                        }
-                        break;
                     }
-                case "Pass":
+                    else
                     {
-                        Console.WriteLine("Turn passed.");
-                        Turn = 2;
-                        Choice_Right = 0;
-                        break;
-                    }
-                case "Take":
-                    {
-                        Console.WriteLine("Choose a Cell to take from. Y coord then X.");
-                        Y = int.Parse(Console.ReadLine());
-                        X = int.Parse(Console.ReadLine());
-                        Console.WriteLine("How much energy do you wish to move?");
-                        Choice = int.Parse(Console.ReadLine());
-                        switch (Owned[Y, X])
+                        if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
                         {
-                            case 0:
-                                {
-                                    Console.WriteLine("You don't own that Cell.");
-                                    break;
-                                }
-                            case 1:
-                                {
-                                    if (Choice < Cells_Size[Y, X])
-                                    {
-                                        if (Cells_Size[Y, X] > 0)
-                                        {
-                                            Cells_Size[Y, X] = Cells_Size[Y, X] - Choice;
-                                            Point_Total = Point_Total + Choice;
-                                            GameBoard(Owned, Cells_Size);
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("That Cell doesn't have enough energy to take.");
-                                        }
-                                    }
-                                    break;
-                                }
+                            Choice = Cells_Size[Y, X] - 1;
+                            Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
                         }
-                        break;
+                        else
+                        {
+                            Console.WriteLine("That Cell is to far away.");
+                        }
                     }
-                case "Cheat":
-                    {
-                        Cells_Size[0, 0] = 5;
-                        Cells_Size[0, 1] = 5;
-                        Owned[0, 1] = 1;
-                        GameBoard(Owned, Cells_Size);
-                        break;
-                    }
-                default:
-                    {
-                        Console.WriteLine("That isn't one of the options.");
-                        break;
-                    }
+                }
+            }
+            else if (Owned[_Y, _X] == 2 || Owned[_Y, _X] == 0)
+            {
+                switch (Owned[Y, X])
+                {
+                    case 0:
+                        {
+                            Console.WriteLine("Sorry you don't own that Cell. Try moving energy there to get it.");
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (Choice < Cells_Size[Y, X])
+                            {
+                                if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                                {
+                                    Cells_Size[Y, X] = Cells_Size[Y, X] - Choice;
+                                    Cells_Size[_Y, _X] = Cells_Size[_Y, _X] + Choice;
+                                    Owned[_Y, _X] = 1;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("That Cell is to far away.");
+                                }
+
+                            }
+                            else
+                            {
+                                if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                                {
+                                    Choice = Cells_Size[Y, X] - 1;
+                                    Cells_Size[Y, X] = Cells_Size[Y, X] - Choice;
+                                    Cells_Size[_Y, _X] = Cells_Size[_Y, _X] + Choice;
+                                    Owned[_Y, _X] = 1;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("That Cell is to far away.");
+                                }
+                            }
+                            break;
+                        }
+                    case 1:
+                        {
+                            Console.WriteLine("Sorry that is Player 2's Cell.");
+                            break;
+                        }
+                }
             }
         }
     }
+    public static void Take(int Choice, int X, int Y, int _X, int _Y, ref int[,] Cells_Size, ref int[,] Owned)
+    {
+        int P1 = Cells_Size[Y, X];
+        int P2 = Cells_Size[_Y, _X];
+
+        P1 = P1 - Choice;
+        P2 = P2 - Choice;
+
+        Cells_Size[Y, X] = P1;
+        Cells_Size[_Y, _X] = P2;
+
+        if (Cells_Size[_Y, _X] <= 0)
+        {
+            Cells_Size[_Y, _X] = 0;
+            Owned[_Y, _X] = 0;
+        }
+        if (Cells_Size[Y, X] <= 1)
+        {
+            Cells_Size[Y, X] = 1;
+        }
+    }
+    public static void Cheat(ref int[,] Cells_Size, ref int[,] Owned)
+    {
+        Cells_Size[0, 0] = 5;
+        Cells_Size[0, 1] = 5;
+        Cells_Size[0, 2] = 10;
+        Owned[0, 1] = 1;
+        Owned[0, 2] = 1;
+        Cells_Size[0, 3] = 5;
+        Owned[0, 3] = 2;
+    }
+
 }
+
