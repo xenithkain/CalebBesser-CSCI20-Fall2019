@@ -208,7 +208,6 @@ class Cell_Invader
         Console.ReadLine();
     }
 
-
     //This is my Intro Method. It Asks user for the amount of players.
     public static void Intro(ref int Player_Count)
     {       
@@ -266,6 +265,24 @@ class Cell_Invader
         Console.WriteLine("");
         Console.WriteLine("----------------");
     }          
+}
+
+class Vector2
+{
+    public int x;
+    public int y;
+
+    public Vector2()
+    {
+        x = 0;
+        y = 0;
+    }
+    public Vector2(int _x, int _y)
+    {
+        x = _x;
+        y = _y;
+    }
+
 }
 
 //This is the Comp class, it controlls the computers activities when there is only 1 player. It gets referenced in the Main class.
@@ -379,6 +396,7 @@ class Turn
             Console.WriteLine("----------------"); 
             Console.WriteLine("Player 1 Wins!");
             Console.WriteLine("----------------");
+            Game_State = 1;
         }
         //Checks to see if Player 2 owns all the cells.
         for (int i = 0; i < 5; i++)
@@ -397,6 +415,7 @@ class Turn
             Console.WriteLine("----------------");
             Console.WriteLine("Player 2 Wins!");
             Console.WriteLine("----------------");
+            Game_State = 1;
         }
         //Adds 1 to each cell owned by a player.
         for (int y = 0; y < 5; y++)
@@ -418,8 +437,8 @@ class Turn
             }
         }
         //Adds the amount of cells owned as points to the players total.
-        Point_Total1 = Point_Total1 + P1;
-        Point_Total2 = Point_Total2 + P2;
+        Point_Total1 += P1;
+        Point_Total2 += P2;
 
 
     }
@@ -441,6 +460,7 @@ class Turn
         Console.WriteLine("At Base, or Manually?");
         Console.WriteLine("----------------");
         string z = Console.ReadLine();
+        Vector2 D_Vec = new Vector2();
        
         if (turn == 1)
         {
@@ -449,15 +469,15 @@ class Turn
             {
                 Console.WriteLine("Choose a cell.");
                 Console.Write("X: ");
-                int X = int.Parse(Console.ReadLine());
+                D_Vec.x = int.Parse(Console.ReadLine());
                 Console.Write("Y: ");
-                int Y = int.Parse(Console.ReadLine());
+                D_Vec.y = int.Parse(Console.ReadLine());
                 Console.Write("Amount to Move: ");
                 int Choice = int.Parse(Console.ReadLine());
 
                 if (Choice <= Point_Total)
                 {
-                    switch (Owned[Y, X])
+                    switch (Owned[D_Vec.y, D_Vec.x])
                     {
                         case 0:
                             {
@@ -466,9 +486,9 @@ class Turn
                             }
                         case 1:
                             {
-                                Cells_Size[Y, X] = Cells_Size[Y, X] + Choice;
-                                Point_Total = Point_Total - Choice;
-                                Owned[Y, X] = 1;
+                                Cells_Size[D_Vec.y, D_Vec.x] = Cells_Size[D_Vec.y, D_Vec.x] + Choice;
+                                Point_Total -= Choice;
+                                Owned[D_Vec.y, D_Vec.x] = 1;
                                 break;
                             }
                         case 2:
@@ -490,7 +510,7 @@ class Turn
                     for (int x = 0; x < 5; x++)
                     {
                         Cells_Size[x, 0] = Cells_Size[x, 0] + 1;
-                        Point_Total = Point_Total - 1;
+                        Point_Total -= 1;
                     }
                     
                 }
@@ -503,14 +523,14 @@ class Turn
             {
                 Console.WriteLine("Choose a cell.");
                 Console.Write("X: ");
-                int X = int.Parse(Console.ReadLine());
+                D_Vec.x = int.Parse(Console.ReadLine());
                 Console.Write("Y: ");
-                int Y = int.Parse(Console.ReadLine());
+                D_Vec.y = int.Parse(Console.ReadLine());
                 Console.Write("Amount to Move: ");
                 int Choice = int.Parse(Console.ReadLine());
                 if (Choice <= Point_Total)
                 {
-                    switch (Owned[Y, X])
+                    switch (Owned[D_Vec.y, D_Vec.x])
                     {
                         case 0:
                             {
@@ -519,9 +539,9 @@ class Turn
                             }
                         case 2:
                             {
-                                Cells_Size[Y, X] = Cells_Size[Y, X] + Choice;
-                                Point_Total = Point_Total - Choice;
-                                Owned[Y, X] = 2;
+                                Cells_Size[D_Vec.y, D_Vec.x] = Cells_Size[D_Vec.y, D_Vec.x] + Choice;
+                                Point_Total -= Choice;
+                                Owned[D_Vec.y, D_Vec.x] = 2;
                                 break;
                             }
                         case 1:
@@ -543,7 +563,7 @@ class Turn
                     for (int x = 0; x < 5; x++)
                     {
                         Cells_Size[x, 4] = Cells_Size[x, 4] + 1;
-                        Point_Total = Point_Total - 1;
+                        Point_Total -= 1;
                     }
                     
                 }
@@ -556,34 +576,36 @@ class Turn
     //the the cells amount = 1, so the cell is left with one. 
     public static void Move(int turn, ref int[,] Owned, ref int[,] Cells_Number, ref int[,] Cells_Size)
     {
+        Vector2 M_Vector = new Vector2();
+        Vector2 M_Vector2 = new Vector2();
         Console.WriteLine("Choose a cell to move from.");
         Console.Write("X: ");
-        int X = int.Parse(Console.ReadLine());
+        M_Vector.x = int.Parse(Console.ReadLine());
         Console.Write("Y: ");
-        int Y = int.Parse(Console.ReadLine());
+        M_Vector.y = int.Parse(Console.ReadLine());
 
         Console.WriteLine("Choose a cell to move to.");
         Console.Write("X: ");
-        int _X = int.Parse(Console.ReadLine());
+        M_Vector2.x = int.Parse(Console.ReadLine());
         Console.Write("Y: ");
-        int _Y = int.Parse(Console.ReadLine());
+        M_Vector2.y = int.Parse(Console.ReadLine());
 
         Console.Write("Amount to Move: ");
         int Choice = int.Parse(Console.ReadLine());
 
         if (turn == 1)
         {
-            if (Owned[_Y, _X] == 2)
+            if (Owned[M_Vector2.y, M_Vector2.x] == 2)
             {
-                if (Choice < Cells_Size[Y, X])
+                if (Choice < Cells_Size[M_Vector.y, M_Vector.x])
                 {
-                    if (Choice < Cells_Size[_Y, _X])
+                    if (Choice < Cells_Size[M_Vector2.y, M_Vector2.x])
                     {
                         
                         //This checks for if the cell your moving to is directly next to the cell your moving from.
-                        if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                        if (Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 1 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 1)
                         {
-                            Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
+                            Take(Choice, M_Vector.x, M_Vector.y, M_Vector2.x, M_Vector2.y, ref Cells_Size, ref Owned);
                         }
                         else
                         {
@@ -592,10 +614,10 @@ class Turn
                     }
                     else
                     {
-                        if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                        if (Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 1 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 1)
                         {
-                            Choice = Cells_Size[_Y, _X];
-                            Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
+                            Choice = Cells_Size[M_Vector2.y, M_Vector2.x];
+                            Take(Choice, M_Vector.x, M_Vector.y, M_Vector2.x, M_Vector2.y, ref Cells_Size, ref Owned);
                         }
                         else
                         {
@@ -606,10 +628,10 @@ class Turn
                 }
                 else
                 {
-                    if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                    if (Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 1 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 1)
                     {
-                        Choice = Cells_Size[Y, X] - 1;
-                        Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
+                        Choice = Cells_Size[M_Vector.y, M_Vector.x] - 1;
+                        Take(Choice, M_Vector.x, M_Vector.y, M_Vector2.x, M_Vector2.y, ref Cells_Size, ref Owned);
                     }
                     else
                     {
@@ -617,9 +639,9 @@ class Turn
                     }
                 }
             }
-            else if (Owned[_Y, _X] == 1 || Owned[_Y, _X] == 0)
+            else if (Owned[M_Vector2.y, M_Vector2.x] == 1 || Owned[M_Vector2.y, M_Vector2.x] == 0)
             {
-                switch (Owned[Y, X])
+                switch (Owned[M_Vector.y, M_Vector.x])
                 {
                     case 0:
                         {
@@ -628,13 +650,13 @@ class Turn
                         }
                     case 1:
                         {
-                            if (Choice < Cells_Size[Y, X])
+                            if (Choice < Cells_Size[M_Vector.y, M_Vector.x])
                             {
-                                if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                                if (Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 1 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 1)
                                 {
-                                    Cells_Size[Y, X] = Cells_Size[Y, X] - Choice;
-                                    Cells_Size[_Y, _X] = Cells_Size[_Y, _X] + Choice;
-                                    Owned[_Y, _X] = 1;
+                                    Cells_Size[M_Vector.y, M_Vector.x] = Cells_Size[M_Vector.y, M_Vector.x] - Choice;
+                                    Cells_Size[M_Vector2.y, M_Vector2.x] = Cells_Size[M_Vector2.y, M_Vector2.x] + Choice;
+                                    Owned[M_Vector2.y, M_Vector2.x] = 1;
                                 }
                                 else
                                 {
@@ -644,12 +666,12 @@ class Turn
                             }
                             else
                             {
-                                if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                                if (Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 1 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 1)
                                 {
-                                    Choice = Cells_Size[Y, X] - 1;
-                                    Cells_Size[Y, X] = Cells_Size[Y, X] - Choice;
-                                    Cells_Size[_Y, _X] = Cells_Size[_Y, _X] + Choice;
-                                    Owned[_Y, _X] = 1;
+                                    Choice = Cells_Size[M_Vector.y, M_Vector.x] - 1;
+                                    Cells_Size[M_Vector.y, M_Vector.x] = Cells_Size[M_Vector.y, M_Vector.x] - Choice;
+                                    Cells_Size[M_Vector2.y, M_Vector2.x] = Cells_Size[M_Vector2.y, M_Vector2.x] + Choice;
+                                    Owned[M_Vector2.y, M_Vector2.x] = 1;
                                 }
                                 else
                                 {
@@ -668,17 +690,17 @@ class Turn
         }
         else if (turn == 2)
         {
-            if (Owned[_Y, _X] == 1)
+            if (Owned[M_Vector2.y, M_Vector2.x] == 1)
             {
-                if (Choice < Cells_Size[Y, X])
+                if (Choice < Cells_Size[M_Vector.y, M_Vector.x])
                 {
-                    if (Choice < Cells_Size[Y, X])
+                    if (Choice < Cells_Size[M_Vector.y, M_Vector.x])
                     {
-                        if (Choice < Cells_Size[_Y, _X])
+                        if (Choice < Cells_Size[M_Vector2.y, M_Vector2.x])
                         {
-                            if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                            if (Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 1 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 1)
                             {
-                                Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
+                                Take(Choice, M_Vector.x, M_Vector.y, M_Vector2.x, M_Vector2.y, ref Cells_Size, ref Owned);
                             }
                             else
                             {
@@ -687,10 +709,10 @@ class Turn
                         }
                         else
                         {
-                            if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                            if (Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 1 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 1)
                             {
-                                Choice = Cells_Size[_Y, _X];
-                                Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
+                                Choice = Cells_Size[M_Vector2.y, M_Vector2.x];
+                                Take(Choice, M_Vector.x, M_Vector.y, M_Vector2.x, M_Vector2.y, ref Cells_Size, ref Owned);
                             }
                             else
                             {
@@ -701,10 +723,10 @@ class Turn
                     }
                     else
                     {
-                        if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                        if (Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 1 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 1)
                         {
-                            Choice = Cells_Size[Y, X] - 1;
-                            Take(Choice, X, Y, _X, _Y, ref Cells_Size, ref Owned);
+                            Choice = Cells_Size[M_Vector.y, M_Vector.x] - 1;
+                            Take(Choice, M_Vector.x, M_Vector.y, M_Vector2.x, M_Vector2.y, ref Cells_Size, ref Owned);
                         }
                         else
                         {
@@ -713,9 +735,9 @@ class Turn
                     }
                 }
             }
-            else if (Owned[_Y, _X] == 2 || Owned[_Y, _X] == 0)
+            else if (Owned[M_Vector2.y, M_Vector2.x] == 2 || Owned[M_Vector2.y, M_Vector2.x] == 0)
             {
-                switch (Owned[Y, X])
+                switch (Owned[M_Vector.y, M_Vector.x])
                 {
                     case 0:
                         {
@@ -724,13 +746,13 @@ class Turn
                         }
                     case 2:
                         {
-                            if (Choice < Cells_Size[Y, X])
+                            if (Choice < Cells_Size[M_Vector.y, M_Vector.x])
                             {
-                                if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                                if (Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 1 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 1)
                                 {
-                                    Cells_Size[Y, X] = Cells_Size[Y, X] - Choice;
-                                    Cells_Size[_Y, _X] = Cells_Size[_Y, _X] + Choice;
-                                    Owned[_Y, _X] = 1;
+                                    Cells_Size[M_Vector.y, M_Vector.x] = Cells_Size[M_Vector.y, M_Vector.x] - Choice;
+                                    Cells_Size[M_Vector2.y, M_Vector2.x] = Cells_Size[M_Vector2.y, M_Vector2.x] + Choice;
+                                    Owned[M_Vector2.y, M_Vector2.x] = 1;
                                 }
                                 else
                                 {
@@ -740,12 +762,12 @@ class Turn
                             }
                             else
                             {
-                                if (Cells_Number[_Y, _X] == Cells_Number[Y, X] - 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 5 || Cells_Number[_Y, _X] == Cells_Number[Y, X] - 1 || Cells_Number[_Y, _X] == Cells_Number[Y, X] + 1)
+                                if (Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 5 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] - 1 || Cells_Number[M_Vector2.y, M_Vector2.x] == Cells_Number[M_Vector.y, M_Vector.x] + 1)
                                 {
-                                    Choice = Cells_Size[Y, X] - 1;
-                                    Cells_Size[Y, X] = Cells_Size[Y, X] - Choice;
-                                    Cells_Size[_Y, _X] = Cells_Size[_Y, _X] + Choice;
-                                    Owned[_Y, _X] = 1;
+                                    Choice = Cells_Size[M_Vector.y, M_Vector.x] - 1;
+                                    Cells_Size[M_Vector.y, M_Vector.x] = Cells_Size[M_Vector.y, M_Vector.x] - Choice;
+                                    Cells_Size[M_Vector2.y, M_Vector2.x] = Cells_Size[M_Vector2.y, M_Vector2.x] + Choice;
+                                    Owned[M_Vector2.y, M_Vector2.x] = 1;
                                 }
                                 else
                                 {
@@ -772,8 +794,8 @@ class Turn
         int P1 = Cells_Size[Y, X];
         int P2 = Cells_Size[_Y, _X];
 
-        P1 = P1 - Choice;
-        P2 = P2 - Choice;
+        P1 -= Choice;
+        P2 -= Choice;
 
         Cells_Size[Y, X] = P1;
         Cells_Size[_Y, _X] = P2;

@@ -6,9 +6,7 @@ class Elo_Code
     {
         string Wins_S, Losses_S = "10";
         string CurrentRank, WantedRank;
-        float WinRate_Decimal, TotalGames, Wins_D, Losses_D, GamesTimesWinRate;
-        int  GamesNeeded;
-
+        
         Console.WriteLine("This is a calculator that will take your current win rate, and current rank in League of Legends. Then you tell it what rank you want, and it will tell you how many games it will take with your current winrate. (Note, if your winrate is below 50% you are not going to climb, and need to get gud m8.)");
         Console.WriteLine("What is your currect number of Ranked Wins?");
         Wins_S = Console.ReadLine();

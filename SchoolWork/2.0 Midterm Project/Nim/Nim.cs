@@ -6,17 +6,14 @@ using System;
 class Game_Of_Nim
 {
     static void Nim()
-    {
-       
-        bool GameIsDone = true;
+    {             
         int Pile_2 = 10;
         int Pile_1 = 10;
-        int Turn = 1;
         int P1_Beads, P1_Pile;
         //This loop keeps the game going untill both pile are to 0
         while (Pile_1 > 0 || Pile_2 > 0 )
         {
-            Turn = 1;
+            int Turn = 1;
             if (Turn == 1)
             {
                 //This is player 1's code, it stops the loop and says player 1 wins if the piles hit zero on his turn                
@@ -43,11 +40,11 @@ class Game_Of_Nim
 
                 if (P1_Pile == 1)
                 {
-                    Pile_1 = Pile_1 - P1_Beads;
+                    Pile_1 -= P1_Beads;
                 }
                 else
                 {
-                    Pile_2 = Pile_2 - P1_Beads;
+                    Pile_2 -= P1_Beads;
                 }
 
                 if (Pile_1 <= 0) //Added to both player 1 and 2, to stop pile count from going into negatives.
@@ -86,11 +83,11 @@ class Game_Of_Nim
                 }
                 if (P2_Pile == 1)
                 {
-                    Pile_1 = Pile_1 - P2_Beads;
+                    Pile_1 -= P2_Beads;
                 }
                 else
                 {
-                    Pile_2 = Pile_2 - P2_Beads;
+                    Pile_2 -= P2_Beads;
                 }                    
                 if (Pile_1 <= 0) 
                 {
@@ -103,7 +100,6 @@ class Game_Of_Nim
                 if (Pile_1 > 0 || Pile_2 > 0)
                 {
                     Console.WriteLine("Pile 1 has " + Pile_1 + " beads left. Pile 2 has " + Pile_2 + " beads left.");
-                    Turn = 1;
                 }
                 else if (Pile_1 <= 0 || Pile_2 <= 0)
                 {

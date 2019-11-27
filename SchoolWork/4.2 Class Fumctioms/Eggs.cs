@@ -10,8 +10,8 @@ class EggCarton
 
     public EggCarton()
     {
-        int brownEggs = 0;
-        int whiteEggs = 0;
+        brownEggs = 0;
+        whiteEggs = 0;
     }
     public EggCarton(int _brownEggs, int _whiteEggs)
     {
@@ -30,7 +30,7 @@ class EggCarton
         }
     }
 
-    public void setBrownEggs(int b)
+    public void SetBrownEggs(int b)
     {
         if (b > 0)
         {
@@ -42,7 +42,7 @@ class EggCarton
         }
 
     }
-    public void setWhiteEggs(int w)
+    public void SetWhiteEggs(int w)
     {
         if (w > 0)
         {
@@ -54,32 +54,32 @@ class EggCarton
         }
     }
 
-    public void addEggs(int eggs, string type)
+    public void AddEggs(int eggs, string type)
     {
         if (eggs > 0)
         {
             if (type == "brown")
             {
-                brownEggs = brownEggs + eggs;
+                brownEggs += eggs;
             }
             if (type == "white")
             {
-                whiteEggs = whiteEggs + eggs;
+                whiteEggs += eggs;
             }
         }
     }
 
-    public int getBrownEggs()
+    public int GetBrownEggs()
     {
         return brownEggs;
     }
 
-    public int getWhiteEggs()
+    public int GetWhiteEggs()
     {
         return whiteEggs;
     }
 
-    public int totalEggs()
+    public int TotalEggs()
     {
         return brownEggs + whiteEggs;
     }
@@ -91,14 +91,14 @@ class MainClasss
 {
     public static void Rect()
     {
-        bool Choice = true;
+        bool Choice;
         EggCarton Carton = new EggCarton();
         do
         {
             Console.WriteLine("How many White eggs do you have?");
-            Carton.setWhiteEggs(int.Parse(Console.ReadLine()));
+            Carton.SetWhiteEggs(int.Parse(Console.ReadLine()));
             Console.WriteLine("How many Brown eggs do you have");
-            Carton.setBrownEggs(int.Parse(Console.ReadLine()));
+            Carton.SetBrownEggs(int.Parse(Console.ReadLine()));
 
             Console.WriteLine("Anymore eggs? yes/no");
             string x = Console.ReadLine();
@@ -117,7 +117,7 @@ class MainClasss
         } while (Choice);
 
 
-        Console.WriteLine("Okay so you have {0} Brown eggs , and {1} White eggs in the Carton.", Carton.getBrownEggs(), Carton.getWhiteEggs());
+        Console.WriteLine("Okay so you have {0} Brown eggs , and {1} White eggs in the Carton.", Carton.GetBrownEggs(), Carton.GetWhiteEggs());
         Console.ReadLine();
 
 
