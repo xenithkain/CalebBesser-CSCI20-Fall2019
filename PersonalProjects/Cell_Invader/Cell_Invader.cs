@@ -13,7 +13,7 @@ class Cell_Invader
 {
     //My main method. This method accesses the other classes and is where i store my reference variable that the other classes use. Its also where the turns
     //take place. I use multiple while loops with a number that decides what turn it is.
-    static void Main()
+    static void Cekks()
     {
         //My Variables, some are elsewhere but all my referenced variables are here.
         
