@@ -20,6 +20,34 @@ namespace Pokemons
     }
     class Battle
     {
+        public static void Move_Cursor_Battle(ref Vector2 Cursor_Pos, ref ConsoleKeyInfo Keyinfo)
+        {
+            Keyinfo = Console.ReadKey(true);
+            Console.Clear();
+
+            switch (Keyinfo.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    {
+                        Cursor_Pos.Y--;
+                        Console.SetCursorPosition(Cursor_Pos.X, Cursor_Pos.Y);
+                        Console.Write("X");
+                        break;
+                    }
+                case ConsoleKey.DownArrow:
+                    {
+                        Cursor_Pos.Y++;
+                        Console.SetCursorPosition(Cursor_Pos.X, Cursor_Pos.Y);
+                        Console.Write("X");
+                        break;
+                    }
+            }
+
+        }
+        public static void Battle_Choice()
+        {
+
+        }
         public static void Draw_Battle(Pokemon Poke1, Pokemon Poke2)
         {
             Console.SetCursorPosition(100, 2);
@@ -172,7 +200,7 @@ namespace Pokemons
         }
     }
     class Player
-    {
+    { 
         public static void Move_Cursor_Choice_Prof(ref Vector2 Cursor_Pos, ref ConsoleKeyInfo Keyinfo, ref Pokemon Starter)
         {
             Keyinfo = Console.ReadKey(true);
@@ -239,31 +267,7 @@ namespace Pokemons
                         }
                 }
             }
-        }
-        public static void Move_Cursor_Battle(ref Vector2 Cursor_Pos, ref ConsoleKeyInfo Keyinfo)
-        {
-            Keyinfo = Console.ReadKey(true);
-            Console.Clear();
-        
-            switch (Keyinfo.Key)
-            {
-                case ConsoleKey.UpArrow:
-                    {
-                        Cursor_Pos.Y--;
-                        Console.SetCursorPosition(Cursor_Pos.X, Cursor_Pos.Y);
-                        Console.Write("X");
-                        break;
-                    }
-                case ConsoleKey.DownArrow:
-                    {
-                        Cursor_Pos.Y++;
-                        Console.SetCursorPosition(Cursor_Pos.X, Cursor_Pos.Y);
-                        Console.Write("X");
-                        break;
-                    }
-            }
-            
-        }
+        }        
         public static void Move_Char(ref Vector2 MVec1, ref ConsoleKeyInfo Keyinfo)
         {
             Keyinfo = Console.ReadKey(true);
@@ -327,8 +331,7 @@ namespace Pokemons
             ConsoleKeyInfo Keyinfo = new ConsoleKeyInfo();
 
             //Variables
-            int Game_State = 0;
-            int redo = 0;           
+            int Game_State = 0;          
             int rand1 = rnd.Next(100);
             int rand2 = rnd.Next(20);
             string Room = "Outside";
@@ -388,7 +391,7 @@ namespace Pokemons
                             
                             do
                             {
-                                Player.Move_Cursor_Battle(ref Cursor_Pos, ref Keyinfo);
+                                Battle.Move_Cursor_Battle(ref Cursor_Pos, ref Keyinfo);
                                 Battle.Draw_Battle(Starter, Wild);                                
                             } while (Battle_ == true);
                             break;
