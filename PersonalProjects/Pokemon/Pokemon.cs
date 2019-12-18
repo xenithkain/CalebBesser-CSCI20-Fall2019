@@ -320,7 +320,7 @@ namespace Pokemons
     }
     class main
     {
-        public static void Main()
+        public static void MMain()
         {
             //Objects
             Pokemon Starter = new Pokemon();

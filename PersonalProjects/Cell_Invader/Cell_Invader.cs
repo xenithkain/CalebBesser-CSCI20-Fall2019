@@ -13,7 +13,7 @@ class Cell_Invader
 {
     //My main method. This method accesses the other classes and is where i store my reference variable that the other classes use. Its also where the turns
     //take place. I use multiple while loops with a number that decides what turn it is.
-    static void Cekks()
+    static void Main()
     {
         //My Variables, some are elsewhere but all my referenced variables are here.
         
@@ -61,19 +61,19 @@ class Cell_Invader
                     //This switch changes what happens depending on what option the player chooses.
                     switch (type)
                     {
-                        case "Distribute":
+                        case "1":
                             {
                                 //This called the Distribute method from the Turn class. I explain what all the methods do down where they are.
                                 Turn.Distribute(turn, ref P1_Point_Total, ref Cells_Size, ref Owned);
                                 break;
                             }
-                        case "Move":
+                        case "2":
                             {
                                 //Calls Move method from Turn class.
                                 Turn.Move(turn, ref Owned, ref Cells_Number, ref Cells_Size);
                                 break;
                             }
-                        case "Pass":
+                        case "3":
                             {
                                 //Just changes turn to 2.
                                 turn = 2;
@@ -132,19 +132,19 @@ class Cell_Invader
                     string type = Console.ReadLine();
                     switch (type)
                     {
-                        case "Distribute":
+                        case "1":
                             {
                                 //Calls Distribute Method from Turn class.
                                 Turn.Distribute(turn, ref P1_Point_Total, ref Cells_Size, ref Owned);
                                 break;
                             }
-                        case "Move":
+                        case "2":
                             {
                                 //Calls Move Method from Turn class.
                                 Turn.Move(turn, ref Owned, ref Cells_Number, ref Cells_Size);
                                 break;
                             }
-                        case "Pass":
+                        case "3":
                             {
                                 //Makes it turn 2.
                                 turn = 2;
@@ -169,17 +169,17 @@ class Cell_Invader
                     string type = Console.ReadLine();
                     switch (type)
                     {
-                        case "Distribute":
+                        case "1":
                             {
                                 Turn.Distribute(turn, ref P2_Point_Total, ref Cells_Size, ref Owned);
                                 break;
                             }
-                        case "Move":
+                        case "2":
                             {
                                 Turn.Move(turn, ref Owned, ref Cells_Number, ref Cells_Size);
                                 break;
                             }
-                        case "Pass":
+                        case "3":
                             {
                                 turn = 3;
                                 break;
@@ -448,7 +448,7 @@ class Turn
     {
         Console.WriteLine("----------------");
         Console.WriteLine("What do you wish to do?");
-        Console.WriteLine("Distribute - Move - Pass");
+        Console.WriteLine("Distribute: 1 - Move: 2 - Pass: 3");
         Console.WriteLine("----------------");
     }
 
@@ -457,7 +457,7 @@ class Turn
     //players inputs for a x and y value and an amount of point. And put the points int hat x and y values cell.
     public static void Distribute(int turn, ref int Point_Total, ref int[,] Cells_Size, ref int[,] Owned)
     {
-        Console.WriteLine("At Base, or Manually?");
+        Console.WriteLine("At Base: 1, or Manually?: 2");
         Console.WriteLine("----------------");
         string z = Console.ReadLine();
         Vector2 D_Vec = new Vector2();
@@ -465,7 +465,7 @@ class Turn
         if (turn == 1)
         {
             //Checks whether you chose to manually distribute.
-            if (z == "Manually")
+            if (z == "2")
             {
                 Console.WriteLine("Choose a cell.");
                 Console.Write("X: ");
@@ -503,7 +503,7 @@ class Turn
                     Console.WriteLine("Sorry you don't have enough energy to do that.");
                 }
             }
-            else if (z == "Base")
+            else if (z == "1")
             {                
                 while (Point_Total > 0)
                 {
@@ -519,7 +519,7 @@ class Turn
         //Same as turn 1 but with player 2's values.
         else if (turn == 2)
         {
-            if (z == "Manually")
+            if (z == "2")
             {
                 Console.WriteLine("Choose a cell.");
                 Console.Write("X: ");
@@ -556,7 +556,7 @@ class Turn
                     Console.WriteLine("Sorry you don't have enough energy to do that.");
                 }
             }
-            else if(z == "Base")
+            else if(z == "1")
             {
                 while (Point_Total > 0)
                 {
