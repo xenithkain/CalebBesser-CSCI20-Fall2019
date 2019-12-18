@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,34 +20,29 @@ namespace Pokemons
     }
     class Battle
     {
-        public static void Move_Cursor_Battle(ref Vector2 Cursor_Pos, ref ConsoleKeyInfo Keyinfo)
+        public static void Draw_Battle_Fight(Pokemon Poke1, Pokemon Poke2)
         {
-            Keyinfo = Console.ReadKey(true);
-            Console.Clear();
-
-            switch (Keyinfo.Key)
-            {
-                case ConsoleKey.UpArrow:
-                    {
-                        Cursor_Pos.Y--;
-                        Console.SetCursorPosition(Cursor_Pos.X, Cursor_Pos.Y);
-                        Console.Write("X");
-                        break;
-                    }
-                case ConsoleKey.DownArrow:
-                    {
-                        Cursor_Pos.Y++;
-                        Console.SetCursorPosition(Cursor_Pos.X, Cursor_Pos.Y);
-                        Console.Write("X");
-                        break;
-                    }
-            }
-
+          Console.SetCursorPosition(100, 2);
+            Console.Write(Poke2.Name);
+            Console.SetCursorPosition(100, 1);
+            Console.Write(Poke2.Level);
+            Console.SetCursorPosition(100, 3);
+            Console.Write("Health: {1}   Exp: {1}", Poke2.Stat_Values[0], Poke2.Experience);
+            Console.SetCursorPosition(3, 20);
+            Console.Write(Poke1.Name);
+            Console.SetCursorPosition(3, 21);
+            Console.Write("Health: {1}   Exp: {1}", Poke1.Stat_Values[0], Poke1.Experience);
+            Console.SetCursorPosition(90, 13);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(Poke1.Moves[0].Name);
+            Console.SetCursorPosition(90, 14);
+            Console.WriteLine(Poke1.Moves[1].Name);
+            Console.SetCursorPosition(90, 15);
+            Console.WriteLine(Poke1.Moves[2].Name);
+            Console.SetCursorPosition(90, 16);
+            Console.WriteLine(Poke1.Moves[3].Name);
         }
-        public static void Battle_Choice()
-        {
-
-        }
+        
         public static void Draw_Battle(Pokemon Poke1, Pokemon Poke2)
         {
             Console.SetCursorPosition(100, 2);
@@ -58,6 +53,8 @@ namespace Pokemons
             Console.Write("Health: {1}   Exp: {1}", Poke2.Stat_Values[0], Poke2.Experience);
             Console.SetCursorPosition(3, 20);
             Console.Write(Poke1.Name);
+            Console.SetCursorPosition(3, 21);
+            Console.Write("Health: {1}   Exp: {1}", Poke1.Stat_Values[0], Poke1.Experience);
             Console.SetCursorPosition(90, 13);
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Fight");
@@ -200,7 +197,7 @@ namespace Pokemons
         }
     }
     class Player
-    { 
+    {
         public static void Move_Cursor_Choice_Prof(ref Vector2 Cursor_Pos, ref ConsoleKeyInfo Keyinfo, ref Pokemon Starter)
         {
             Keyinfo = Console.ReadKey(true);
@@ -267,7 +264,85 @@ namespace Pokemons
                         }
                 }
             }
-        }        
+        }
+        public static void Move_Cursor_Battle(ref Vector2 Cursor_Pos, ref ConsoleKeyInfo Keyinfo, ref string Room)
+        {
+            Keyinfo = Console.ReadKey(true);
+            Console.Clear();
+        
+            switch (Keyinfo.Key)
+            {
+              case ConsoleKey.UpArrow:
+                  {
+                      Cursor_Pos.Y--;
+                      Console.SetCursorPosition(Cursor_Pos.X, Cursor_Pos.Y);
+                      Console.Write("X");
+                      break;
+                  }
+              case ConsoleKey.DownArrow:
+                  {
+                      Cursor_Pos.Y++;
+                      Console.SetCursorPosition(Cursor_Pos.X, Cursor_Pos.Y);
+                      Console.Write("X");
+                      break;
+                  }
+            }
+            if (Cursor_Pos.Y == 13)
+            {
+              switch (Keyinfo.Key)
+              {
+                  case ConsoleKey.Enter:
+                      {
+                          Room = "Fight_Screen";
+                          break;
+                      }
+              }
+            }
+            else if (Cursor_Pos.Y == 14)
+            {
+              switch (Keyinfo.Key)
+              {
+                  case ConsoleKey.Enter:
+                      {
+                          Room = "Pokemon_Screen";
+                          break;
+                      }
+              }
+            }
+            else if (Cursor_Pos.Y == 15)
+            {
+              switch (Keyinfo.Key)
+              {
+                  case ConsoleKey.Enter:
+                      {
+                          Room = "Bag_Screen";
+                          break;
+                      }
+              }
+            }
+            else if (Cursor_Pos.Y == 16)
+            {
+              switch (Keyinfo.Key)
+                {
+                    case ConsoleKey.Enter:
+                        {                         
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                switch (Keyinfo.Key)
+                {
+                    case ConsoleKey.Enter:
+                        {
+                            Console.Write("Please go to one of the options.");
+                            break;
+                        }
+                }
+            }
+            
+        }
         public static void Move_Char(ref Vector2 MVec1, ref ConsoleKeyInfo Keyinfo)
         {
             Keyinfo = Console.ReadKey(true);
@@ -320,10 +395,12 @@ namespace Pokemons
     }
     class main
     {
-        public static void MMain()
+        public static void Main()
         {
+            Console.Clear();
             //Objects
             Pokemon Starter = new Pokemon();
+            Pokemon Wild = new Pokemon();
             Vector2 Cursor_Pos = new Vector2(98, 13);
             Vector2 Cursor_Pos_Prof = new Vector2(24, 5);
             Vector2 MVec1 = new Vector2(10, 5);
@@ -331,10 +408,14 @@ namespace Pokemons
             ConsoleKeyInfo Keyinfo = new ConsoleKeyInfo();
 
             //Variables
-            int Game_State = 0;          
+            int Game_State = 0;       
             int rand1 = rnd.Next(100);
             int rand2 = rnd.Next(20);
             string Room = "Outside";
+            Starter.Moves[0].Name = "Tackle";
+            Starter.Moves[1].Name = "Growl";
+            Starter.Moves[2].Name = "Null";
+            Starter.Moves[3].Name = "Null";
 
             //Lists, and Arrays for Pokemon
             List<string> Names = new List<string> { "Pikachu", "Pidgey", "Mewtwo", "Magikarp" };
@@ -385,17 +466,26 @@ namespace Pokemons
                             bool Battle_ = true;
                             Move[] wild = new Move[5];
                             int[] Stat_Values_rnd = { 15, rnd.Next(3, 10), rnd.Next(3, 10), rnd.Next(3, 10), rnd.Next(3, 10), rnd.Next(3, 10) };
-                            int Types_rnd = rnd.Next(0, 9);
-                            int Wild_rnd = rnd.Next(0, 5);
-                            Pokemon Wild = new Pokemon(Names[Wild_rnd], Types[Types_rnd], "Null", wild, Stat_Names, Stat_Values_rnd, rnd.Next(2, 5), 0);
+                            int Types_rnd = rnd.Next(0, 7);
+                            int Wild_rnd = rnd.Next(0, 4);                           
+                            
                             
                             do
                             {
-                                Battle.Move_Cursor_Battle(ref Cursor_Pos, ref Keyinfo);
+                                Player.Move_Cursor_Battle(ref Cursor_Pos, ref Keyinfo, ref Room);
                                 Battle.Draw_Battle(Starter, Wild);                                
-                            } while (Battle_ == true);
+                            } while (Room == "Wild Battle");
+                            Console.Clear();
                             break;
                         }
+                      case "Fight_Screen":
+                      {
+                        do
+                        {
+                          Battle.Draw_Battle_Fight(Starter, Wild);
+                        }while(Room == "Fight_Screen");
+                        break;
+                      }
                     case "Pokemon_Screen":
                         {
                             break;
@@ -413,5 +503,3 @@ namespace Pokemons
         }
     }
 }
-
-
